@@ -1,0 +1,101 @@
+.logslideer {
+    -fx-background-image: url("bag.png");
+}
+.logbag {
+    -fx-background-color: linear-gradient(to bottom right, #3a1200, #7a2a00, #ff8c1a); -fx-background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px); -fx-background-size: 3px 3px;
+}
+
+.create-btn {
+    -fx-background-color: linear-gradient(to right, #ff8c42, #ff6a00);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 25px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+}
+.create-btn:hover {
+    -fx-background-color: linear-gradient(to right, #ff9a55, #ff7a1a);
+}
+.create-btn:pressed {
+    -fx-background-color: #e65c00;
+}
+
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom right, rgba(58,18,0,0.6), rgba(122,42,0,0.5), rgba(255,140,26,0.4));
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+
+    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 25, 0.25, 0, 6);
+}
+
+.anchor-paneReg {
+    -fx-background-color: rgba(255, 140, 26, 0.18);
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+
+    -fx-border-color: rgba(255, 255, 255, 0.25);
+    -fx-border-width: 1;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 20, 0.3, 0, 5);
+}
+
+.signin-btn {
+    -fx-background-color: linear-gradient(to right, #ff9f1a, #ffb84d);
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 30px;
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.3, 0, 3);
+}
+
+.signin-btn:hover {
+    -fx-background-color: linear-gradient(to right, #ffb84d, #ffd27a);
+}
+
+.signin-btn:pressed {
+    -fx-background-color: #e68900;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0.2, 0, 2);
+}
+
+.signin-btn:focused {
+    -fx-border-color: rgba(255,255,255,0.6);
+    -fx-border-width: 1;
+}
+.auth-btn {
+    -fx-background-color: linear-gradient(to right, #e67e22, #ff9f43);
+    -fx-text-fill: white;
+
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 10px 32px;
+
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+
+    -fx-border-color: rgba(255,255,255,0.25);
+    -fx-border-width: 1;
+
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0.3, 0, 4);
+}
+
+.auth-btn:hover {
+    -fx-background-color: linear-gradient(to right, #ff9f43, #ffb366);
+}
+
+.auth-btn:pressed {
+    -fx-background-color: #cc6f1a;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0.2, 0, 2);
+}
+
+.auth-btn:focused {
+    -fx-border-color: rgba(255,255,255,0.5);
+}

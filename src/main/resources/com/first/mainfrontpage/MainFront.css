@@ -1,5 +1,8 @@
 .menubag {
-    -fx-background-color: linear-gradient(to bottom right, #3a1200, #7a2a00, #ff8c1a); -fx-background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px); -fx-background-size: 3px 3px;
+    -fx-background-color: linear-gradient(to bottom right, #7a2f00, #d97a00, #ffc266);
+
+    -fx-background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px);
+    -fx-background-size: 5px 5px;
 }
 
 .menu-btn {
@@ -26,3 +29,49 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0.2, 0, 2);
 }
 
+.signout-btn {
+    -fx-background-color: rgba(0, 0, 0, 0.08); /* very soft visible base */
+    -fx-background-radius: 50%;
+
+    -fx-padding: 12px;
+    -fx-cursor: hand;
+
+    /* icon bigger + dark */
+    -fx-icon-color: #5a1e00;
+    -fx-icon-size: 20px; /* increase size */
+
+    /* subtle shadow to feel clickable */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.3, 0, 2);
+}
+
+/* HOVER → clearer feedback */
+.signout-btn:hover {
+    -fx-background-color: linear-gradient(
+        to bottom right,
+        rgba(255, 166, 77, 0.35),
+        rgba(255, 210, 140, 0.35)
+    );
+
+    -fx-scale-x: 1.12;
+    -fx-scale-y: 1.12;
+
+    -fx-icon-color: #7a2f00;
+}
+
+/* CLICK → red blink */
+.signout-btn:pressed {
+    -fx-background-color: rgba(255, 0, 0, 0.4);
+
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+
+    -fx-icon-color: #ff1a1a;
+}
+.signout-text {
+    -fx-text-fill: #fff3e6;  /* soft warm white */
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+
+    /* subtle shadow for clarity */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 3, 0.3, 0, 1);
+}

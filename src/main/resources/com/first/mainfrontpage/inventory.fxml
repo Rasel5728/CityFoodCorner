@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="550.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.InventoryController">
    <children>
       <AnchorPane layoutX="169.0" layoutY="101.0" prefHeight="550.0" prefWidth="716.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -65,8 +64,8 @@
                      </font>
                   </Label>
                   <TextField layoutX="358.0" layoutY="71.0" prefHeight="26.0" prefWidth="156.0" promptText="0.0" />
-                  <AnchorPane layoutX="550.0" layoutY="11.0" prefHeight="146.0" prefWidth="130.0" styleClass="shadow" stylesheets="@../Alpha/inventoryDesign.css" />
-                  <Button layoutX="578.0" layoutY="166.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Import" />
+                  <AnchorPane layoutX="540.0" layoutY="11.0" prefHeight="153.0" prefWidth="140.0" styleClass="shadow" stylesheets="@../Alpha/inventoryDesign.css" />
+                  <Button layoutX="573.0" layoutY="177.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Import" />
                   <Button layoutX="194.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Update" />
                   <Button layoutX="292.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Clear" />
                   <Button layoutX="392.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Delete" />

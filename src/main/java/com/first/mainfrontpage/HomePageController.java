@@ -53,6 +53,7 @@ public class HomePageController implements Initializable {
         }
     }
 
+    //sign out button logic
     @FXML
     private void signout(ActionEvent event) throws IOException {
         SwitchScene switchScene = new SwitchScene();

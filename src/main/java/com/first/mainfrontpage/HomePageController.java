@@ -4,14 +4,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomePageController implements Initializable {
-
+    @FXML
+    private Button logoutButton;
     @FXML
     private AnchorPane contentPane;
 
@@ -50,8 +53,18 @@ public class HomePageController implements Initializable {
         }
     }
 
+    @FXML
+    private void signout(ActionEvent event) throws IOException {
+        SwitchScene switchScene = new SwitchScene();
+        switchScene.switchscene(event,"SignupLogin.fxml");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        FontIcon icon = new FontIcon("fa-sign-out");
+        icon.setIconSize(12);
+        logoutButton.setGraphic(icon);
+
         try {
             loadingContent("dashBoard.fxml");
         } catch (IOException e) {

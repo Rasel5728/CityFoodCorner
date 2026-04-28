@@ -40,3 +40,6 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
+.table-view{
+-fx-border-color: #2c3e50;
+}

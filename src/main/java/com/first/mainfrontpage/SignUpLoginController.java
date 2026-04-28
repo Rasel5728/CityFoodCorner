@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 public class SignUpLoginController {
 
     @FXML
@@ -41,5 +43,13 @@ public class SignUpLoginController {
         else{
             resisterBtn.setText("Sign In");
         }
+    }
+
+    public void signIn(ActionEvent event) throws IOException {
+        SwitchScene switchScene = new SwitchScene();
+        switchScene.switchscene(event, "MainFront.fxml");
+    }
+    public void register(ActionEvent event){
+
     }
 }

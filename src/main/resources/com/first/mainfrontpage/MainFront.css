@@ -1,0 +1,28 @@
+.menubag {
+    -fx-background-color: linear-gradient(to bottom right, #3a1200, #7a2a00, #ff8c1a); -fx-background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px); -fx-background-size: 3px 3px;
+}
+
+.menu-btn {
+    -fx-background-color: linear-gradient(to right, #e67e22, #ff9f43);
+    -fx-text-fill: white;
+
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 10px 32px;
+
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0.3, 0, 4);
+
+}
+
+.menu-btn:hover {
+    -fx-background-color: linear-gradient(to right, #ff9f43, #ffb366);
+}
+
+.menu-btn:pressed {
+    -fx-background-color: #cc6f1a;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0.2, 0, 2);
+}
+

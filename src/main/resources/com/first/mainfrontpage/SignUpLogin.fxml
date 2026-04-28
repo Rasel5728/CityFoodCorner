@@ -40,7 +40,7 @@
                         <Font size="13.0" />
                     </font>
                 </Label>
-                <Button layoutX="51.0" layoutY="340.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="signin-btn" stylesheets="@../CSSwithPicture/login.css" text="Sign in" />
+                <Button layoutX="51.0" layoutY="340.0" mnemonicParsing="false" onAction="#signIn" prefHeight="35.0" prefWidth="200.0" styleClass="signin-btn" stylesheets="@../CSSwithPicture/login.css" text="Sign in" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="42.0" layoutY="53.0" prefHeight="443.0" prefWidth="298.0" styleClass="anchor-paneReg" stylesheets="@../CSSwithPicture/login.css">
@@ -62,7 +62,7 @@
                     </font>
                 </Text>
                 <PasswordField layoutX="51.0" layoutY="219.0" prefHeight="30.0" prefWidth="200.0" promptText="enter password" />
-                <Button layoutX="51.0" layoutY="351.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="signin-btn" stylesheets="@../CSSwithPicture/login.css" text="Resister" />
+                <Button layoutX="51.0" layoutY="351.0" mnemonicParsing="false" onAction="#register" prefHeight="35.0" prefWidth="200.0" styleClass="signin-btn" stylesheets="@../CSSwithPicture/login.css" text="Resister" />
                 <Text fill="WHITE" layoutX="51.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retype Password">
                     <font>
                         <Font size="13.0" />

@@ -40,8 +40,8 @@
                               <Button layoutX="18.0" layoutY="275.0" mnemonicParsing="false" onAction="#inventory" prefHeight="42.0" prefWidth="196.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="INVENTORY" />
                               <Button layoutX="17.0" layoutY="332.0" mnemonicParsing="false" onAction="#menu" prefHeight="42.0" prefWidth="196.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="MENU" />
                               <Button layoutX="17.0" layoutY="389.0" mnemonicParsing="false" onAction="#customers" prefHeight="42.0" prefWidth="196.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="CUSTOMERS" />
-                              <Button layoutX="14.0" layoutY="511.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="38.0" />
-                              <Label layoutX="59.0" layoutY="513.0" text="Sign Out" textFill="WHITE">
+                              <Button fx:id="logoutButton" layoutX="14.0" layoutY="511.0" mnemonicParsing="false" onAction="#signout" prefHeight="27.0" prefWidth="38.0" />
+                              <Label layoutX="86.0" layoutY="514.0" text="Sign Out" textFill="WHITE">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

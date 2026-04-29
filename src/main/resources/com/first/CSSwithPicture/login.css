@@ -99,3 +99,13 @@
 .auth-btn:focused {
     -fx-border-color: rgba(255,255,255,0.5);
 }
+
+.combo-box {
+    -fx-background-color: #fff8e6;
+    -fx-border-color: #ffb366;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+
+    -fx-padding: 5px;
+}
+

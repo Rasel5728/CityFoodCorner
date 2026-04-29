@@ -1,8 +1,235 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="550.0" prefWidth="716.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.DashBoardcontroller">
-
+<AnchorPane prefHeight="550.0" prefWidth="716.0" style="-fx-background-color: #f5efda;" stylesheets="@../CSSwithPicture/dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.DashBoardcontroller">
+   <children>
+      <AnchorPane layoutX="15.0" layoutY="58.0" prefHeight="90.0" prefWidth="161.0" style="-fx-background-radius: 12; -fx-background-color: #ffff;" stylesheets="@../CSSwithPicture/dashboard.css">
+         <children>
+            <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/customer1.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Total Customers">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Text>
+            <Label fx:id="customerCount" layoutX="99.0" layoutY="33.0" prefHeight="26.0" prefWidth="42.0" text="059">
+               <font>
+                  <Font name="Arial Bold" size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="42.0" layoutX="126.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/rise.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="190.0" layoutY="58.0" prefHeight="90.0" prefWidth="161.0" style="-fx-background-radius: 12; -fx-background-color: #ffff;" stylesheets="@../CSSwithPicture/dashboard.css">
+         <children>
+            <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="13.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/cash.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Today's Income">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Text>
+            <Label layoutX="97.0" layoutY="31.0" prefHeight="26.0" prefWidth="42.0" text="765">
+               <font>
+                  <Font name="Arial Bold" size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="33.0" layoutX="127.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/profit-up.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="365.0" layoutY="58.0" prefHeight="90.0" prefWidth="161.0" style="-fx-background-radius: 12; -fx-background-color: #ffff;" stylesheets="@../CSSwithPicture/dashboard.css">
+         <children>
+            <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/wallet.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Total Income">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Text>
+            <Label layoutX="66.0" layoutY="29.0" prefHeight="32.0" prefWidth="73.0" text="14380">
+               <font>
+                  <Font name="Arial Bold" size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="33.0" layoutX="128.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/expensive.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="540.0" layoutY="58.0" prefHeight="90.0" prefWidth="161.0" style="-fx-background-radius: 12; -fx-background-color: #ffff;" stylesheets="@../CSSwithPicture/dashboard.css">
+         <children>
+            <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/cart.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Sold Items">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Text>
+            <Label layoutX="97.0" layoutY="32.0" prefHeight="26.0" prefWidth="42.0" text="075">
+               <font>
+                  <Font name="Arial Bold" size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="52.0" layoutX="129.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/increase.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="383.0" layoutY="165.0" prefHeight="210.0" prefWidth="318.0" style="-fx-background-color: #fff; -fx-background-radius: 10;">
+         <children>
+            <BarChart layoutX="-10.0" layoutY="6.0" prefHeight="203.0" prefWidth="330.0" title="Customer Overview">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="13.0" layoutY="167.0" prefHeight="210.0" prefWidth="357.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" />
+      <Text layoutX="21.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DASHBOARD">
+         <font>
+            <Font name="Arial Bold" size="25.0" />
+         </font>
+      </Text>
+      <AnchorPane layoutX="492.0" layoutY="392.0" prefHeight="146.0" prefWidth="210.0" style="-fx-background-color: #fff; -fx-background-radius: 10;">
+         <children>
+            <Text layoutX="15.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Top 3 Selling Items">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="26.0" fitWidth="42.0" layoutX="19.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" styleClass="image-container">
+               <image>
+                  <Image url="@../CSSwithPicture/burger.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="42.0" layoutX="19.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" styleClass="image-container">
+               <image>
+                  <Image url="@../CSSwithPicture/ChickenCutlet.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="42.0" layoutX="19.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" styleClass="image-container">
+               <image>
+                  <Image url="@../CSSwithPicture/ChickenMomos.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="70.0" layoutY="40.0" text="Chicken Burger">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="70.0" layoutY="78.0" text="Chicken Cutlet">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="72.0" layoutY="114.0" text="Chicken Momos">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <LineChart fx:id="incomeOverviewChart" layoutX="1.0" layoutY="175.0" prefHeight="203.0" prefWidth="366.0" title="Income Overview">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <AnchorPane layoutX="14.0" layoutY="392.0" prefHeight="146.0" prefWidth="467.0" style="-fx-background-color: #fff; -fx-background-radius: 10;">
+         <children>
+            <Text layoutX="11.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Quick Summary">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="100.00001525878906" endY="12.4000244140625" layoutX="46.66999999999999" layoutY="106.0" startX="100.00001525878906" startY="-50.199981689453125" />
+            <Line endX="100.00003051757812" endY="14.800048828125" layoutX="199.0" layoutY="106.0" startX="100.00001525878906" startY="-50.199981689453125" />
+            <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="8.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/checklist.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="59.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Order">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Text>
+            <Label layoutX="64.0" layoutY="62.0" prefHeight="32.0" prefWidth="66.0" text="00">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="157.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/fastfood.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="208.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Items">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Text>
+            <Label layoutX="213.0" layoutY="62.0" prefHeight="32.0" prefWidth="66.0" text="00">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="311.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/stock.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="362.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory Items">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Text>
+            <Label layoutX="367.0" layoutY="62.0" prefHeight="32.0" prefWidth="66.0" text="00">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>

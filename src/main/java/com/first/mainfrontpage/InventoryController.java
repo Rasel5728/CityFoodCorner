@@ -1,5 +1,6 @@
 package com.first.mainfrontpage;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -73,5 +74,30 @@ public class InventoryController {
 
     @FXML
     private Button inventory_updateBtn;
+
+    @FXML
+    void inventoryAddBtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inventoryClearBtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inventoryDeleteBtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inventoryImportBtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inventoryUpdateBtn(ActionEvent event) {
+
+    }
 
 }

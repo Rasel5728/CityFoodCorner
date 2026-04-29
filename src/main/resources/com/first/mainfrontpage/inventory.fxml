@@ -69,17 +69,17 @@
                      <children>
                         <ImageView fx:id="inventory_imageView" fitHeight="153.0" fitWidth="140.0" layoutX="3.0" pickOnBounds="true" preserveRatio="true" />
                      </children></AnchorPane>
-                  <Button fx:id="inventory_importBtn" layoutX="573.0" layoutY="177.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Import" />
-                  <Button fx:id="inventory_updateBtn" layoutX="194.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Update" />
-                  <Button fx:id="inventory_clearBtn" layoutX="292.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Clear" />
-                  <Button fx:id="S" layoutX="392.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Delete" />
+                  <Button fx:id="inventory_importBtn" layoutX="573.0" layoutY="177.0" mnemonicParsing="false" onAction="#inventoryImportBtn" prefHeight="30.0" prefWidth="74.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Import" />
+                  <Button fx:id="inventory_updateBtn" layoutX="194.0" layoutY="175.0" mnemonicParsing="false" onAction="#inventoryUpdateBtn" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Update" />
+                  <Button fx:id="inventory_clearBtn" layoutX="292.0" layoutY="175.0" mnemonicParsing="false" onAction="#inventoryClearBtn" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Clear" />
+                  <Button fx:id="S" layoutX="392.0" layoutY="175.0" mnemonicParsing="false" onAction="#inventoryDeleteBtn" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Delete" />
                   <ComboBox fx:id="inventory_status" layoutX="358.0" layoutY="108.0" prefHeight="26.0" prefWidth="156.0" promptText="Choose Status..." />
                   <Label layoutX="308.0" layoutY="111.0" text="Status:">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="inventory_addBtn" layoutX="97.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Add" />
+                  <Button fx:id="inventory_addBtn" layoutX="97.0" layoutY="175.0" mnemonicParsing="false" onAction="#inventoryAddBtn" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="btn" stylesheets="@../Alpha/inventoryDesign.css" text="Add" />
                </children>
             </AnchorPane>
             <Separator layoutX="14.0" layoutY="296.8" prefHeight="8.0" prefWidth="691.0" AnchorPane.bottomAnchor="245.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="297.0" />

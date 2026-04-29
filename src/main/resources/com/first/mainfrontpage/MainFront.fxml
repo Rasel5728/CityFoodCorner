@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.HomePageController">
    <children>
@@ -17,31 +18,36 @@
                <left>
                   <AnchorPane prefHeight="550.0" prefWidth="218.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutX="-0.6000000000000001" prefHeight="550.0" prefWidth="239.0" styleClass="menubag" stylesheets="@MainFront.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.6000000000000001" AnchorPane.rightAnchor="-0.19999999999998863" AnchorPane.topAnchor="0.0">
+                        <AnchorPane layoutX="-1.0" prefHeight="550.0" prefWidth="234.0" styleClass="menubag" stylesheets="@MainFront.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-17.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="246.0" layoutX="-7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                              <Label layoutX="26.0" layoutY="167.0" text="Welcome:" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="19.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="117.0" layoutY="168.0" text="Customers" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="19.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="20.0" layoutY="225.0" mnemonicParsing="false" onAction="#dashBoard" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="DASHBOARD" />
+                              <Button layoutX="20.0" layoutY="284.0" mnemonicParsing="false" onAction="#inventory" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="INVENTORY" />
+                              <Button layoutX="19.0" layoutY="341.0" mnemonicParsing="false" onAction="#menu" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="MENU" />
+                              <Button layoutX="19.0" layoutY="398.0" mnemonicParsing="false" onAction="#customers" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="CUSTOMERS" />
+                              <Button fx:id="logoutButton" layoutX="19.0" layoutY="484.0" mnemonicParsing="false" onAction="#signout" prefHeight="45.0" prefWidth="50.0" styleClass="signout-btn" stylesheets="@MainFront.css">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Button>
+                              <ImageView fitHeight="157.0" fitWidth="222.0" layoutX="8.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../CSSwithPicture/iconlogo.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="24.0" layoutY="163.0" text="Welcome:" textFill="WHITE">
+                              <Text fill="WHITE" layoutX="81.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Out">
                                  <font>
-                                    <Font name="System Bold" size="19.0" />
+                                    <Font name="Arial Bold" size="17.0" />
                                  </font>
-                              </Label>
-                              <Label layoutX="115.0" layoutY="164.0" text="Customers" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="19.0" />
-                                 </font>
-                              </Label>
-                              <Button layoutX="20.0" layoutY="222.0" mnemonicParsing="false" onAction="#dashBoard" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="DASHBOARD" />
-                              <Button layoutX="21.0" layoutY="281.0" mnemonicParsing="false" onAction="#inventory" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="INVENTORY" />
-                              <Button layoutX="20.0" layoutY="338.0" mnemonicParsing="false" onAction="#menu" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="MENU" />
-                              <Button layoutX="20.0" layoutY="395.0" mnemonicParsing="false" onAction="#customers" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="CUSTOMERS" />
-                              <Button fx:id="logoutButton" layoutX="18.0" layoutY="484.0" mnemonicParsing="false" onAction="#signout" prefHeight="45.0" prefWidth="50.0" styleClass="signout-btn" stylesheets="@MainFront.css">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Button>
+                              </Text>
                            </children>
                         </AnchorPane>
                      </children>
@@ -50,7 +56,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="contentPane" layoutX="14.0" prefHeight="550.0" prefWidth="716.0" style="-fx-background-color: #f0dab4;" stylesheets="@MainFront.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0" />
+                        <AnchorPane fx:id="contentPane" layoutX="4.199999999999932" prefHeight="550.0" prefWidth="716.0" style="-fx-background-color: #f0dab4;" stylesheets="@MainFront.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.6000000000000227" AnchorPane.topAnchor="0.0" />
                      </children></AnchorPane>
                </center>
             </BorderPane>

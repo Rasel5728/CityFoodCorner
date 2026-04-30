@@ -1,0 +1,10 @@
+.slidepic {
+    -fx-background-image: url("bag.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.gradient {
+    -fx-background-color: linear-gradient(to bottom right, #3a1200, #7a2a00, #ff8c1a);
+}

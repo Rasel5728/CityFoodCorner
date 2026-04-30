@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="950.0" style="-fx-background-radius: 2;" styleClass="logbag" stylesheets="@../CSSwithPicture/login.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.SignUpLoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="950.0" styleClass="gradient" stylesheets="@../loginProblem/resolve.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.SignUpLoginController">
     <children>
         <AnchorPane layoutX="606.0" layoutY="53.0" prefHeight="443.0" prefWidth="298.0" styleClass="anchor-pane" stylesheets="@../CSSwithPicture/login.css">
             <children>
@@ -80,7 +80,7 @@
             </Text>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="slidePane" prefHeight="550.0" prefWidth="558.0" styleClass="logslideer" stylesheets="@../CSSwithPicture/login.css">
+        <AnchorPane fx:id="slidePane" prefHeight="550.0" prefWidth="558.0" styleClass="slidepic" stylesheets="@../loginProblem/resolve.css">
             <children>
                 <Button fx:id="resisterBtn" layoutX="195.0" layoutY="474.0" mnemonicParsing="false" onAction="#slide" prefHeight="46.0" prefWidth="209.0" styleClass="auth-btn" stylesheets="@../CSSwithPicture/login.css" text="Create New Account" />
             </children>

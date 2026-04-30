@@ -187,33 +187,6 @@
     -fx-border-color: #555555;
 }
 
-
-.cart-btn {
-    -fx-background-color: #ff8c00;
-    -fx-text-fill: white;
-
-    -fx-font-size: 11px;
-    -fx-font-weight: bold;
-
-    -fx-padding: 2 2;
-
-    -fx-background-radius: 9;
-
-    -fx-border-color: rgba(255,255,255,0.25);
-    -fx-border-width: 1;
-
-    -fx-cursor: hand;
-}
-.cart-btn:hover {
-    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #ff9f43, #ffb366);
-}
-.cart-btn:pressed {
-    -fx-background-color: #cc6f1a;
-}
-.cart-btn:focused {
-    -fx-border-color: rgba(255,255,255,0.5);
-}
-
 .root {
     -fx-background-color: #ffffff;
     -fx-border-color: #f7e1c8;
@@ -330,3 +303,4 @@
     -fx-background-radius: 6;
     -fx-border-width: 0;
 }
+

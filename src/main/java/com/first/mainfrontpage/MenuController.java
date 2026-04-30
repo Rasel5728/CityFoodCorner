@@ -6,12 +6,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
+    public VBox leftScrool;
+    public VBox rightScrool;
     @FXML
     private ScrollPane scrollbar;
     @FXML
@@ -19,32 +22,35 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+       removeScrollBar(scrollbar);
         try {
-            addlist(12);
+            addlist(13);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     void addlist(int item) throws IOException {
-        menulist.getChildren().clear();
-        int column = 0; int row = 0;
-        scrollbar.setFitToWidth(true);
-        scrollbar.setFitToHeight(false);
-        menulist.setMinHeight(600);
         for(int i=0; i<item; i++){
-            loadList(column, row);
-            column++;
-            if(column==2){
-                column=0;
-                row++;
+            if(i%2 != 0){
+                rightScrool.getChildren().add(loadList());
+            }
+            else {
+                leftScrool.getChildren().add(loadList());
             }
         }
+
     }
-    void loadList(int col, int row) throws IOException {
+    AnchorPane loadList() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("foodCard.fxml"));
         AnchorPane card = loader.load();
         FoodCardController controller = loader.getController();
-        menulist.add(card,col,row);
+        return card;
     }
+
+    void removeScrollBar(ScrollPane scrollPane) {
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    }
+
 }

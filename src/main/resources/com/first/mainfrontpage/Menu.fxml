@@ -9,106 +9,111 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="550.0" prefWidth="716.0" style="-fx-background-color: #f5efda;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.MenuController">
-   <children>
-      <AnchorPane layoutX="438.0" layoutY="19.0" prefHeight="520.0" prefWidth="265.0" styleClass="side-anchor" stylesheets="@../CSSwithPicture/login.css">
-         <children>
-            <AnchorPane layoutX="2.0" layoutY="1.0" prefHeight="60.0" prefWidth="265.0" styleClass="topanchor" stylesheets="@../CSSwithPicture/login.css">
-               <children>
-                  <Text fill="WHITE" layoutX="10.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Order">
-                     <font>
+    <children>
+        <AnchorPane layoutX="438.0" layoutY="19.0" prefHeight="520.0" prefWidth="265.0" styleClass="side-anchor" stylesheets="@../CSSwithPicture/login.css">
+            <children>
+                <AnchorPane layoutX="2.0" layoutY="1.0" prefHeight="60.0" prefWidth="265.0" styleClass="topanchor" stylesheets="@../CSSwithPicture/login.css">
+                    <children>
+                        <Text fill="WHITE" layoutX="10.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Order">
+                            <font>
+                                <Font name="Arial Bold" size="15.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </AnchorPane>
+                <TableView layoutX="2.0" layoutY="40.0" prefHeight="224.0" prefWidth="265.0" stylesheets="@../CSSwithPicture/login.css">
+                    <columns>
+                        <TableColumn prefWidth="108.0" text="Product Nme" />
+                        <TableColumn minWidth="0.0" prefWidth="71.20001220703125" text="Quantity" />
+                        <TableColumn prefWidth="102.4000244140625" text="Price" />
+                    </columns>
+                </TableView>
+                <Text layoutX="17.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:">
+                    <font>
+                        <Font name="Arial" size="15.0" />
+                    </font>
+                </Text>
+                <Text layoutX="17.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount:">
+                    <font>
+                        <Font name="Arial" size="15.0" />
+                    </font>
+                </Text>
+                <Text layoutX="16.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change:">
+                    <font>
+                        <Font name="Arial" size="15.0" />
+                    </font>
+                </Text>
+                <Line endX="132.199951171875" endY="-3.0517578125E-5" layoutX="118.0" layoutY="388.0" smooth="false" startX="-100.0" stroke="#00000042" />
+                <Label layoutX="180.0" layoutY="285.0" prefHeight="18.0" prefWidth="65.0" text="       0.00 " textFill="DARKORANGE">
+                    <font>
                         <Font name="Arial Bold" size="15.0" />
-                     </font>
-                  </Text>
-               </children></AnchorPane>
-            <TableView layoutX="2.0" layoutY="40.0" prefHeight="224.0" prefWidth="265.0" stylesheets="@../CSSwithPicture/login.css">
-              <columns>
-                <TableColumn prefWidth="108.0" text="Product Nme" />
-                <TableColumn minWidth="0.0" prefWidth="71.20001220703125" text="Quantity" />
-                  <TableColumn prefWidth="102.4000244140625" text="Price" />
-              </columns>
-            </TableView>
-            <Text layoutX="17.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:">
-               <font>
-                  <Font name="Arial" size="15.0" />
-               </font>
-            </Text>
-            <Text layoutX="17.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount:">
-               <font>
-                  <Font name="Arial" size="15.0" />
-               </font>
-            </Text>
-            <Text layoutX="16.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change:">
-               <font>
-                  <Font name="Arial" size="15.0" />
-               </font>
-            </Text>
-            <Line endX="132.199951171875" endY="-3.0517578125E-5" layoutX="118.0" layoutY="388.0" smooth="false" startX="-100.0" stroke="#00000042" />
-            <Label layoutX="180.0" layoutY="285.0" prefHeight="18.0" prefWidth="65.0" text="       0.00 " textFill="DARKORANGE">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="129.0" layoutY="314.0" prefHeight="15.0" prefWidth="115.0" />
-            <Label layoutX="180.0" layoutY="350.0" prefHeight="18.0" prefWidth="65.0" text="       0.00 " textFill="#068025ed">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <Button layoutX="16.0" layoutY="405.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="234.0" styleClass="pay-btn" stylesheets="@../CSSwithPicture/login.css" text="  Pay">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-            <Button layoutX="18.0" layoutY="466.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" styleClass="remove-btn" stylesheets="@../CSSwithPicture/login.css" text="Remove">
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../MenuPicture/delete.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="143.0" layoutY="466.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="107.0" styleClass="receipt-btn" stylesheets="@../CSSwithPicture/login.css" text="Receipt">
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../MenuPicture/bill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </AnchorPane>
-      <Text layoutX="19.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MENU">
-         <font>
-            <Font name="Arial Bold" size="25.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="664.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../MenuPicture/agile.png" />
-         </image>
-      </ImageView>
-      <AnchorPane layoutX="8.0" layoutY="77.0" prefHeight="467.0" prefWidth="418.0">
-         <children>
-            <ScrollPane fx:id="scrollbar" layoutY="-2.0" prefHeight="491.0" prefWidth="415.0" stylesheets="@../MenuPicture/scrollPane.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <content>
-                  <HBox prefHeight="478.0" prefWidth="414.0">
-                     <children>
-                        <VBox fx:id="leftScrool" prefHeight="467.0" prefWidth="209.0" spacing="2.0" />
-                        <VBox fx:id="rightScrool" prefHeight="467.0" prefWidth="209.0" spacing="2.0" />
-                     </children>
-                  </HBox>
-               </content>
-            </ScrollPane>
-         </children>
-      </AnchorPane>
-   </children>
+                    </font>
+                </Label>
+                <TextField layoutX="129.0" layoutY="314.0" prefHeight="15.0" prefWidth="115.0" />
+                <Label layoutX="180.0" layoutY="350.0" prefHeight="18.0" prefWidth="65.0" text="       0.00 " textFill="#068025ed">
+                    <font>
+                        <Font name="Arial Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Button layoutX="16.0" layoutY="405.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="234.0" styleClass="pay-btn" stylesheets="@../CSSwithPicture/login.css" text="  Pay">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Button>
+                <Button layoutX="18.0" layoutY="466.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" styleClass="remove-btn" stylesheets="@../CSSwithPicture/login.css" text="Remove">
+                    <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../MenuPicture/delete.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="143.0" layoutY="466.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="107.0" styleClass="receipt-btn" stylesheets="@../CSSwithPicture/login.css" text="Receipt">
+                    <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../MenuPicture/bill.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <AnchorPane layoutX="-428.0" layoutY="3.0" prefHeight="74.0" prefWidth="423.0" styleClass="topanchor" stylesheets="@../CSSwithPicture/login.css">
+                    <children>
+                        <Text fill="WHITE" layoutX="162.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add to Tray">
+                            <font>
+                                <Font name="Arial Bold" size="18.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="664.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../MenuPicture/agile.png" />
+            </image>
+        </ImageView>
+        <AnchorPane layoutX="8.0" layoutY="61.0" prefHeight="478.0" prefWidth="426.0">
+            <children>
+                <ScrollPane fx:id="scrollbar" layoutY="-2.0" prefHeight="478.0" prefWidth="426.0" stylesheets="@../MenuPicture/scrollPane.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                        <GridPane fx:id="menuGrid" hgap="2.0" vgap="2.0" prefWidth="426.0">
+                            <columnConstraints>
+                                <ColumnConstraints prefWidth="213.0" />
+                                <ColumnConstraints prefWidth="213.0" />
+                            </columnConstraints>
+                        </GridPane>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

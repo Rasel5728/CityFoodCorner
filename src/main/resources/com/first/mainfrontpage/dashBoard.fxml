@@ -42,7 +42,7 @@
          <children>
             <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="13.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../CSSwithPicture/cash.png" />
+                  <Image url="@../CSSwithPicture/money.png" />
                </image>
             </ImageView>
             <Label layoutX="97.0" layoutY="31.0" prefHeight="26.0" prefWidth="42.0" text="765">

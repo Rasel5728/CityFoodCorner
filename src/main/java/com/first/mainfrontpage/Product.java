@@ -21,12 +21,8 @@ public class Product {
     }
 
     //GETTER METHOD
-    public String getProductID(){
-        return productID;
-    }
-    public String getProductName(){
-        return productName;
-    }
+    public String getProductID(){return productID;}
+    public String getProductName(){return productName;}
     public String getType(){
         return type;
     }

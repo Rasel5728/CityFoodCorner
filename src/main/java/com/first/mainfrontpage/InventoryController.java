@@ -49,7 +49,7 @@ public class InventoryController implements Initializable {
     private final ObservableList<Product> productList= FXCollections.observableArrayList();
     private Connection connection;
 
-    //INITIALIZE METHOD
+    //INITIALIZE CLASS
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
@@ -81,9 +81,10 @@ public class InventoryController implements Initializable {
         loadAllProducts();
     }
 
+    //LOAD METHOD, TO GET DATA FROM DB
     private void loadAllProducts(){
         productList.clear();
-        String sql="SELECT * FROM product";
+        String sql="SELECT * FROM products";
         try(Statement stmt=connection.createStatement();
         ResultSet rs=stmt.executeQuery(sql)){
             while(rs.next()){
@@ -97,49 +98,106 @@ public class InventoryController implements Initializable {
                         rs.getString("date")
                 ));
             }
-
         }catch (SQLException e){
             showAlert(Alert.AlertType.ERROR,"DataBase Error",e.getMessage());
-
         }
-
     }
 
-
-
-
-
-
-
-
-
-
-
+    //ADD ADD_BUTTON
     @FXML
     void inventoryAddBtn(ActionEvent event) {
+        if(!validateInputs()) return;
 
+        String sql = "INSERT INTO products VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try(PreparedStatement ps=connection.prepareStatement(sql)){
+            ps.setString(1, inventory_productID.getText().trim());
+            ps.setString(2, inventory_productName.getText().trim());
+            ps.setString(3,inventory_type.getValue());
+            ps.setInt(4,Integer.parseInt(inventory_stock.getText().trim()));
+            ps.setDouble(5,Double.parseDouble(inventory_price.getText().trim()));
+            ps.setString(6,inventory_status.getValue());
+            ps.setString(7,LocalDate.now().toString());
+
+            ps.executeUpdate();
+            showAlert(Alert.AlertType.INFORMATION,"Success","Product added successfully");
+            loadAllProducts();
+            clearForm();
+        }catch (SQLIntegrityConstraintViolationException e){
+            showAlert(Alert.AlertType.WARNING,"Duplicate ID","Product id already exists");
+        }catch (Exception e){
+            showAlert(Alert.AlertType.ERROR,"DataBase error",e.getMessage());
+        }
     }
 
+    //UPDATE NUTTON
     @FXML
     void inventoryUpdateBtn(ActionEvent event) {
+        if(inventory_tableView.getSelectionModel().getSelectedItem()==null){
+            showAlert(Alert.AlertType.WARNING,"No selection","please select a row to update");
+            return;
+        }
+    if (!validateInputs()) return;
+    String sql="UPDATE products SET product_name=?,product_id=?,type=?,stock=?,price=?,status=?,date=?";
 
+        try(PreparedStatement ps=connection.prepareStatement(sql)){
+            ps.setString(1, inventory_productName.getText().trim());
+            ps.setString(2, inventory_productID.getText().trim());
+            ps.setString(3,inventory_type.getValue());
+            ps.setInt(4,Integer.parseInt(inventory_stock.getText().trim()));
+            ps.setDouble(5,Double.parseDouble(inventory_price.getText().trim()));
+            ps.setString(6,inventory_status.getValue());
+            ps.setString(7,LocalDate.now().toString());
+
+
+            ps.executeUpdate();
+            showAlert(Alert.AlertType.INFORMATION,"Success","Product added successfully");
+            loadAllProducts();
+            clearForm();
+        }catch (SQLException e){
+            showAlert(Alert.AlertType.ERROR,"DataBase error",e.getMessage());
+        }
     }
 
+    //ADD CLEAR_BUTTON
     @FXML
     void inventoryClearBtn(ActionEvent event) {
+        clearForm();
 
     }
 
+    //DELETE BUTTON
     @FXML
     void inventoryDeleteBtn(ActionEvent event) {
-
+        Product selected=inventory_tableView.getSelectionModel().getSelectedItem();
+        if (selected==null){
+            showAlert(Alert.AlertType.WARNING,"No Selecton","Please select a row to delete");
+            return;
+        }
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "Delete \"" + selected.getProductName() + "\"?",
+                ButtonType.YES, ButtonType.NO);
+        confirm.setTitle(("Confirm Delete"));
+        confirm.showAndWait().ifPresent(btn ->{
+            if(btn==ButtonType.YES){
+                String sql= "DELETE FROM products WHERE product_id=?";
+                try(PreparedStatement ps=connection.prepareStatement(sql)){
+                    ps.setString(1,selected.getProductID());
+                    ps.executeUpdate();
+                    showAlert(Alert.AlertType.INFORMATION,"Deleted","Product Deleted");
+                    loadAllProducts();
+                    clearForm();
+                }catch (Exception e){
+                    showAlert(Alert.AlertType.ERROR,"DataBase Error",e.getMessage());
+                }
+            }
+        });
     }
 
+    //IMPORT IMAGE METHOD
     @FXML
     void inventoryImportBtn(ActionEvent event) {
 
     }
-
 
     //FILLFORM METHOD
     private void fillForm(Product p){
@@ -151,11 +209,58 @@ public class InventoryController implements Initializable {
         inventory_status.setValue(p.getStatus());
     }
 
+    //CLEAR METHOD
+    private void clearForm(){
+        inventory_productID.clear();
+        inventory_productName.clear();
+        inventory_type.setValue(null);
+        inventory_stock.clear();
+        inventory_price.clear();
+        inventory_status.setValue(null);
+        inventory_imageView.setImage(null);
+        inventory_tableView.getSelectionModel().clearSelection();
+
+    }
+
     //ALERT METHOD
     private void showAlert(Alert.AlertType type,String title,String msg){
         Alert alert=new Alert(type);
-        //alert.setTitle(title);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
 
+    //ADD VALIDATE INPUT METHOD
+    private boolean validateInputs(){
+        if (inventory_productID.getText().trim().isEmpty()){
+            showAlert(Alert.AlertType.ERROR, "Validation","Product id cannot be empty");
+            return false;
+        }
+        if (inventory_productName.getText().trim().isEmpty()){
+            showAlert(Alert.AlertType.ERROR, "Validation","Product name cannot be empty");
+            return false;
+        }
+        if (inventory_type.getValue()==null){
+            showAlert(Alert.AlertType.ERROR, "Validation","Pleace choice a type");
+            return false;
+        }
+        if (inventory_status.getValue()==null){
+            showAlert(Alert.AlertType.ERROR, "Validation","Pleace choice a status");
+            return false;
+        }
+        try {
+            Integer.parseInt(inventory_stock.getText().trim());
+        }catch (Exception e){
+            showAlert(Alert.AlertType.ERROR, "Validation", "Stock must be a number");
+            return false;
+        }try {
+            Double.parseDouble(inventory_price.getText().trim());
+        }catch (Exception e){
+            showAlert(Alert.AlertType.ERROR,"Validation", "Price must be a number");
+            return false;
+        }
+        return true;
+    }
 
 }

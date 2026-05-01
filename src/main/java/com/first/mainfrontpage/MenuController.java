@@ -1,9 +1,13 @@
 package com.first.mainfrontpage;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -14,6 +18,14 @@ import java.util.ResourceBundle;
 public class MenuController implements Initializable {
 
     @FXML
+    private TableView tablevVew;
+    @FXML
+    private TableColumn<String[],String> tableColumn;
+    @FXML
+    private TableColumn<String[],String> quantity;
+    @FXML
+    private TableColumn<String[],String> price;
+    @FXML
     private ScrollPane scrollbar;
     @FXML
     private GridPane menuGrid;
@@ -21,6 +33,7 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         removeScrollBar(scrollbar);
+      //  setToTable("Burger","5","400"); // value works
         try {
             addlist(13);
         } catch (IOException e) {
@@ -40,6 +53,7 @@ public class MenuController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("foodCard.fxml"));
         AnchorPane card = loader.load();
         FoodCardController controller = loader.getController();
+        controller.setMenuController(this); // passing controller to food card for saving current state -_-
         return card;
     }
 
@@ -47,4 +61,19 @@ public class MenuController implements Initializable {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
+
+    //start
+   void indexMaping(){
+        tableColumn.setCellValueFactory(nameData->
+             new ReadOnlyStringWrapper(nameData.getValue()[0])
+        );
+        quantity.setCellValueFactory((quantity->new ReadOnlyStringWrapper(quantity.getValue()[1])));
+        price.setCellValueFactory(prc -> new ReadOnlyStringWrapper(prc.getValue()[2]));
+   }
+
+   public void setToTable(String name, String quantity, String price){
+         indexMaping();
+        tablevVew.getItems().add(new String[]{name,quantity,price});
+   }
+
 }

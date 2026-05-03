@@ -196,6 +196,13 @@ public class InventoryController implements Initializable {
     //IMPORT IMAGE METHOD
     @FXML
     void inventoryImportBtn(ActionEvent event) {
+        FileChooser fc=new FileChooser();
+        fc.setTitle("Choose image file");
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image file","*.png","*.jpg","*.gif","*.jpeg"));
+        File file=fc.showOpenDialog(inventory_importBtn.getScene().getWindow());
+        if (file!=null){
+            inventory_imageView.setImage(new Image(file.toURI().toString()));
+        }
 
     }
 

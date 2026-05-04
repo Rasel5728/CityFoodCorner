@@ -74,6 +74,15 @@ public class SignUpLoginController implements Initializable{
         String password = PFRpassword.getText();
         String question = CBRquestion.getValue();
         String answer = TFRrecovaryAnswer.getText();
+
+        if (email.isEmpty() || password.isEmpty() || answer.isEmpty() || question == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all fields.");
+            alert.showAndWait();
+            return;
+        }
     }
 
     // sign up page logic close

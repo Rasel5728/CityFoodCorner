@@ -38,7 +38,7 @@
                         <Image url="@../CSSwithPicture/restaurant.png" />
                     </image></ImageView>
                 <Button layoutX="51.0" layoutY="340.0" mnemonicParsing="false" onAction="#signIn" prefHeight="35.0" prefWidth="200.0" styleClass="signin-btn" stylesheets="@../CSSwithPicture/login.css" text="Sign in" />
-            <Hyperlink fx:id="HLLforgotPasswrd" layoutX="154.0" layoutY="287.0" text="forgot password?" textFill="WHITE" />
+            <Hyperlink layoutX="154.0" layoutY="287.0" onAction="#forgotPassword" text="forgot password?" textFill="WHITE" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="48.0" layoutY="32.0" prefHeight="488.0" prefWidth="298.0" styleClass="anchor-paneReg" stylesheets="@../CSSwithPicture/login.css">

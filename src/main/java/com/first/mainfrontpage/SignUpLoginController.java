@@ -3,13 +3,15 @@ package com.first.mainfrontpage;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SignUpLoginController {
+public class SignUpLoginController implements Initializable{
 
     // animation logic start
     @FXML
@@ -47,21 +49,31 @@ public class SignUpLoginController {
     }
     // animation logic close
 
+
     // sign up page logic start
     @FXML
     private TextField TFRemail;
-
     @FXML
     private PasswordField PFRpassword;
-
     @FXML
-    private ComboBox<?> CBRquestion;
-
+    private ComboBox<String> CBRquestion;
     @FXML
     private TextField TFRrecovaryAnswer;
 
-    public void register(ActionEvent event){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        CBRquestion.getItems().add("What is your favorite food?");
+        CBRquestion.getItems().add("What is your laptop brand name?");
+        CBRquestion.getItems().add("What is your mobile brand name?");
+        CBRquestion.getItems().add("What is your least favorite food?");
+    }
 
+    @FXML
+    private void register(ActionEvent event){
+        String email = TFRemail.getText();
+        String password = PFRpassword.getText();
+        String question = CBRquestion.getValue();
+        String answer = TFRrecovaryAnswer.getText();
     }
 
     // sign up page logic close
@@ -70,10 +82,6 @@ public class SignUpLoginController {
     // sign in page logic start
     @FXML
     private TextField TFLemail;
-
-    @FXML
-    private Hyperlink HLLforgotPasswrd;
-
     @FXML
     private PasswordField PFLpassword;
 
@@ -82,6 +90,16 @@ public class SignUpLoginController {
         switchScene.switchscene(event, "MainFront.fxml");
     }
 
-    // sign up page logic close
+    // sign in page logic close
+
+
+    // forgot password logic start
+    @FXML
+    void forgotPassword(ActionEvent event) {
+
+    }
+    // forgot password logic close
+
+
 
 }

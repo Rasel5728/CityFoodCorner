@@ -26,7 +26,7 @@
                   <Font name="Arial Bold" size="13.0" />
                </font>
             </Text>
-            <Label fx:id="customerCount" layoutX="99.0" layoutY="33.0" prefHeight="26.0" prefWidth="42.0" text="059">
+            <Label fx:id="dashboard_totalCustomer" layoutX="99.0" layoutY="33.0" prefHeight="26.0" prefWidth="42.0" text="059">
                <font>
                   <Font name="Arial Bold" size="22.0" />
                </font>
@@ -45,7 +45,7 @@
                   <Image url="@../CSSwithPicture/money.png" />
                </image>
             </ImageView>
-            <Label layoutX="97.0" layoutY="31.0" prefHeight="26.0" prefWidth="42.0" text="765">
+            <Label fx:id="dashboard_todayIncome" layoutX="97.0" layoutY="31.0" prefHeight="26.0" prefWidth="42.0" text="765">
                <font>
                   <Font name="Arial Bold" size="22.0" />
                </font>
@@ -69,7 +69,7 @@
                   <Image url="@../CSSwithPicture/wallet.png" />
                </image>
             </ImageView>
-            <Label layoutX="66.0" layoutY="29.0" prefHeight="32.0" prefWidth="73.0" text="14380">
+            <Label fx:id="dashboard_totalIncome" layoutX="66.0" layoutY="29.0" prefHeight="32.0" prefWidth="73.0" text="14380">
                <font>
                   <Font name="Arial Bold" size="22.0" />
                </font>
@@ -93,7 +93,7 @@
                   <Image url="@../CSSwithPicture/cart.png" />
                </image>
             </ImageView>
-            <Label layoutX="97.0" layoutY="32.0" prefHeight="26.0" prefWidth="42.0" text="075">
+            <Label fx:id="dashboard_solditems" layoutX="97.0" layoutY="32.0" prefHeight="26.0" prefWidth="42.0" text="075">
                <font>
                   <Font name="Arial Bold" size="22.0" />
                </font>
@@ -112,7 +112,7 @@
       </AnchorPane>
       <AnchorPane layoutX="383.0" layoutY="165.0" prefHeight="210.0" prefWidth="318.0" style="-fx-background-color: #fff; -fx-background-radius: 10;">
          <children>
-            <BarChart layoutX="-10.0" layoutY="6.0" prefHeight="203.0" prefWidth="330.0" title="Customer Overview">
+            <BarChart fx:id="dashboard_customerOverview" layoutX="-10.0" layoutY="6.0" prefHeight="203.0" prefWidth="330.0" title="Customer Overview">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -145,17 +145,17 @@
                   <Image url="@../MenuPicture/ChickenMomos.jpg" />
                </image>
             </ImageView>
-            <Label layoutX="70.0" layoutY="40.0" text="Chicken Burger">
+            <Label fx:id="dashboard_topsellingItem1" layoutX="70.0" layoutY="40.0" text="Chicken Burger">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="70.0" layoutY="78.0" text="Chicken Cutlet">
+            <Label fx:id="dashboard_topsellingItem2" layoutX="70.0" layoutY="78.0" text="Chicken Cutlet">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="72.0" layoutY="114.0" text="Chicken Momos">
+            <Label fx:id="dashboard_topsellingItem3" layoutX="72.0" layoutY="114.0" text="Chicken Momos">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
@@ -167,7 +167,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <LineChart fx:id="incomeOverviewChart" layoutX="1.0" layoutY="175.0" prefHeight="203.0" prefWidth="366.0" title="Income Overview">
+      <LineChart fx:id="dashboard_incomeOverview" layoutX="1.0" layoutY="175.0" prefHeight="203.0" prefWidth="366.0" title="Income Overview">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -214,17 +214,17 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
-            <Label layoutX="83.0" layoutY="62.0" prefHeight="26.0" prefWidth="42.0" text="059">
+            <Label fx:id="dashboard_totalOrder" layoutX="83.0" layoutY="62.0" prefHeight="26.0" prefWidth="42.0" text="059">
                <font>
                   <Font name="Arial Bold" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="234.0" layoutY="62.0" prefHeight="26.0" prefWidth="42.0" text="059">
+            <Label fx:id="dashboard_menuItems" layoutX="234.0" layoutY="62.0" prefHeight="26.0" prefWidth="42.0" text="059">
                <font>
                   <Font name="Arial Bold" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="403.0" layoutY="60.0" prefHeight="26.0" prefWidth="42.0" text="059">
+            <Label fx:id="dashboard_inventoryItems" layoutX="403.0" layoutY="60.0" prefHeight="26.0" prefWidth="42.0" text="059">
                <font>
                   <Font name="Arial Bold" size="22.0" />
                </font>

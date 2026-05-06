@@ -13,14 +13,14 @@ import java.util.ResourceBundle;
 public class DashBoardcontroller implements Initializable {
 
     @FXML
-    private Label customerCount;
+    private Label dashboard_totalCustomer;
     @FXML
-    private LineChart<String,Number> incomeOverviewChart;
+    private LineChart<String,Number> dashboard_incomeOverview;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        customerCount.setText("100");
+        dashboard_totalCustomer.setText("100");
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Income");
@@ -31,7 +31,7 @@ public class DashBoardcontroller implements Initializable {
         series.getData().add(new XYChart.Data<>("Apr", 700));
         series.getData().add(new XYChart.Data<>("May", 400));
 
-        incomeOverviewChart.getData().add(series);
+        dashboard_incomeOverview.getData().add(series);
     }
 }
 

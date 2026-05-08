@@ -2,12 +2,11 @@ package com.first.mainfrontpage;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -17,6 +16,12 @@ import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
 
+    @FXML
+    private TextField ammountField;
+    @FXML
+    private Label changes;
+    @FXML
+    private Label totalField;
     @FXML
     private TableView tablevVew;
     @FXML
@@ -30,9 +35,12 @@ public class MenuController implements Initializable {
     @FXML
     private GridPane menuGrid;
 
+    private static double currentPrice= 0 ;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         removeScrollBar(scrollbar);
+
       //  setToTable("Burger","5","400"); // value works
         try {
             addlist(13);
@@ -74,6 +82,23 @@ public class MenuController implements Initializable {
    public void setToTable(String name, String quantity, String price){
          indexMaping();
         tablevVew.getItems().add(new String[]{name,quantity,price});
+        currentPrice+=Integer.parseInt(price);
+        totalField.setText(Double.toString(currentPrice));
    }
+
+   @FXML
+    private void  remove(){
+        tablevVew.getItems().clear();
+        currentPrice = currentPrice - currentPrice;
+        totalField.setText(Double.toString(currentPrice));
+        changes.setText("0.0");
+        ammountField.clear();
+   }
+
+   @FXML
+    private void pay(){
+        changes.setText(Double.toString(Double.parseDouble(ammountField.getText()) - Double.parseDouble(totalField.getText())));
+   }
+
 
 }

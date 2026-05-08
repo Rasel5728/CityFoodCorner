@@ -1,5 +1,5 @@
 .slidepic {
-    -fx-background-image: url("bag.png");
+    -fx-background-image: url("new.png");
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -7,4 +7,37 @@
 
 .gradient {
     -fx-background-color: linear-gradient(to bottom right, #3a1200, #7a2a00, #ff8c1a);
+}
+
+
+.sign-in-btn {
+    -fx-background-color: linear-gradient(
+        rgba(232, 130, 12, 0.65),
+        rgba(201, 106, 8, 0.55)
+    );
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-padding: 10 40 10 40;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(232,130,12,0.3), 8, 0, 0, 2);
+}
+
+/* Hover */
+.sign-in-btn:hover {
+    -fx-background-color: linear-gradient(
+        rgba(232, 130, 12, 0.85),
+        rgba(201, 106, 8, 0.75)
+    );
+    -fx-effect: dropshadow(gaussian, rgba(232,130,12,0.5), 12, 0, 0, 3);
+}
+
+/* Pressed */
+.sign-in-btn:pressed {
+    -fx-background-color: linear-gradient(
+        rgba(201, 106, 8, 0.9),
+        rgba(168, 85, 0, 0.85)
+    );
 }

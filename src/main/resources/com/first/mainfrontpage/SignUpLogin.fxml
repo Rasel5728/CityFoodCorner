@@ -80,9 +80,9 @@
             </Text>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="slidePane" prefHeight="550.0" prefWidth="558.0" styleClass="slidepic" stylesheets="@../loginProblem/resolve.css">
+        <AnchorPane fx:id="slidePane" layoutX="-7.0" layoutY="-6.0" prefHeight="558.0" prefWidth="542.0" styleClass="slidepic" stylesheets="@../loginProblem/resolve.css">
             <children>
-                <Button fx:id="resisterBtn" layoutX="195.0" layoutY="474.0" mnemonicParsing="false" onAction="#slide" prefHeight="46.0" prefWidth="209.0" styleClass="auth-btn" stylesheets="@../CSSwithPicture/login.css" text="Create New Account" />
+                <Button fx:id="resisterBtn" layoutX="319.0" layoutY="492.0" mnemonicParsing="false" onAction="#slide" prefHeight="40.0" prefWidth="212.0" styleClass="sign-in-btn" stylesheets="@../loginProblem/resolve.css" text="Create New Account" />
             </children>
         </AnchorPane>
     </children>

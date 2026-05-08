@@ -36,10 +36,10 @@ public class SignUpLoginController implements Initializable{
         transition.setDuration(Duration.millis(250));
 
         if(clicked==false){
-            transition.setByX(392);
+            transition.setByX(420);
         }
         else{
-            transition.setByX(-392);
+            transition.setByX(-420);
         }
         transition.play();
         clicked = !clicked;
@@ -87,23 +87,51 @@ public class SignUpLoginController implements Initializable{
 
     @FXML
     private void register(ActionEvent event){
-        // taking data for each field
-        String email = TFRemail.getText();
+        // taking data from each field
+        String email = TFRemail.getText().trim();
         String password = PFRpassword.getText();
         String question = CBRquestion.getValue();
-        String answer = TFRrecovaryAnswer.getText();
+        String answer = TFRrecovaryAnswer.getText().trim();
 
-        // checking every field filled or not
-        if (email.isEmpty() || password.isEmpty() || answer.isEmpty() || question== null) {
-            showAlert(Alert.AlertType.WARNING, "Warning", "Please fill all of the fields.");
+        // checking if all fields are filled or not
+        if (email.isEmpty() && password.isEmpty() && question == null && answer.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Please fill all of the fields");
             return;
         }
-        // checking if the password is less than 4 characters
-        if (password.length() < 4) {
-            showAlert(Alert.AlertType.WARNING, "Warning", "Password must be at least 4 characters.");
+        // checking individual fields filled or not
+        if (email.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Enter your email");
+            return;
+        }
+        if (password.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Enter a password");
+            return;
+        }
+        if (question == null) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Security question is not selected");
+            return;
+        }
+        if (answer.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Enter your recovery answer");
             return;
         }
 
+        // checking email and password validity
+        String validEmail = "^[a-z0-9_]+@gmail\\.com$";
+        if (!email.matches(validEmail)) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Email", "Please enter a valid Gmail address (e.g: example@gmail.com)");
+            return;
+        }
+        if (password.length() < 6) {
+            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must be contain at least 6 character");
+            return;
+        }
+        String strongPass = ".*[!@#$%&*_?].*";
+        if (!password.matches(strongPass)) {
+            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must be contain at least one special character");
+            return;
+        }
+        // checked
         try{ // building connection with database
             Connection ctn = DatabaseConnection.getConnection();
 
@@ -160,25 +188,34 @@ public class SignUpLoginController implements Initializable{
     private PasswordField PFLpassword;
 
     public void signIn(ActionEvent event) throws IOException {
-        // taking data for each field
-        String email = TFLemail.getText();
+        // taking data from each field
+        String email = TFLemail.getText().trim();
         String password = PFLpassword.getText();
 
-        // checking every field filled or not
-        if (email.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Warning", "Please enter your email and password.");
+        // checking if all fields are filled or not
+        if (email.isEmpty() && password.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Please fill all of the fields.");
             return;
         }
-
+        // checking every field filled or not
+        if (email.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Enter your email");
+            return;
+        }
+        if (password.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Enter your password");
+            return;
+        }
+        // checked
         try {// building connection with database
             Connection cnt = DatabaseConnection.getConnection();
 
-            // checking if the email is already registered or not
-            String loginSQL = "SELECT * FROM users WHERE email = ? AND password = ?";
-            PreparedStatement stmt = cnt.prepareStatement(loginSQL);
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
+            // checking if the email and password are matched or not
+            String chkData = "SELECT * FROM users WHERE email = ? AND password = ?";
+            PreparedStatement chkSmt = cnt.prepareStatement(chkData);
+            chkSmt.setString(1, email);
+            chkSmt.setString(2, password);
+            ResultSet rs = chkSmt.executeQuery();
 
             // yes: go to main page
             if (rs.next()) {
@@ -200,12 +237,73 @@ public class SignUpLoginController implements Initializable{
             showAlert(Alert.AlertType.ERROR, "Database Error", "Could not connect to database. " + e.getMessage());
         }
     }
-    // sign in page logic close
+// sign in page logic close
 
-
-    // forgot password logic start
+// forgot password logic start
     @FXML
     void forgotPassword(ActionEvent event) {
+
+        // taking email
+        TextInputDialog emailDialog = new TextInputDialog();
+        emailDialog.setTitle("Forgot Password");
+        emailDialog.setHeaderText(null);
+        emailDialog.setContentText("Enter your registered email:");
+
+        String email = emailDialog.showAndWait().orElse("").trim();
+
+        if (email.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Email field cannot be empty");
+            return;
+        }
+
+        try { // building connection with database
+            Connection cnt = DatabaseConnection.getConnection();
+
+            // checking if the email matched or not
+            String chkData = "SELECT security_question FROM users WHERE email = ?";
+            PreparedStatement chkSmt = cnt.prepareStatement(chkData);
+            chkSmt.setString(1, email);
+            ResultSet rs = chkSmt.executeQuery();
+            // no: no access
+            if (!rs.next()) {
+                showAlert(Alert.AlertType.ERROR, "Not Found", "No account found with this email.");
+                cnt.close();
+                return;
+            }
+            // yes: find security question by email
+            String securityQuestion = rs.getString("security_question");
+
+            TextInputDialog ansDialog = new TextInputDialog();
+            ansDialog.setTitle("Forgot Password");
+            ansDialog.setHeaderText(null);
+            ansDialog.setContentText(securityQuestion);
+
+            String answer = ansDialog.showAndWait().get();
+            // no answer alert
+            if (answer.isEmpty()) {
+                showAlert(Alert.AlertType.WARNING, "Warning", "Answer field cannot be empty.");
+                cnt.close();
+                return;
+            }
+
+            // find pass by ans
+            String chkAns = "SELECT password FROM users WHERE security_answer = ?";
+            PreparedStatement chkStmt = cnt.prepareStatement(chkAns);
+            chkStmt.setString(1, answer);
+            ResultSet rs1 = chkStmt.executeQuery();
+
+            if (rs1.next()) {
+                String storedPassword = rs1.getString("password");
+                showAlert(Alert.AlertType.INFORMATION, "Your Password", "Your password is: " + storedPassword);
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Wrong Answer", "Security answer does not match.");
+            }
+            cnt.close();
+
+        } catch (SQLException e) {
+            // Database connection issue
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Could not connect to database. " + e.getMessage());
+        }
     }
-    // forgot password logic close
+// forgot password logic close
 }

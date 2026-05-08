@@ -44,7 +44,7 @@ public class FoodCardController implements Initializable {
 
     public void addFood(ActionEvent actionEvent) {
         //okaj
-        if(!Objects.equals(countFood.getText(), "0")) controller.setToTable(foodName.getText(),countFood.getText(),foodPrice.getText());
+        if(!Objects.equals(countFood.getText(), "0")) controller.setToTable(foodName.getText(),countFood.getText(),Integer.toString(Integer.parseInt(foodPrice.getText())*Integer.parseInt(countFood.getText())));
 
     }
 

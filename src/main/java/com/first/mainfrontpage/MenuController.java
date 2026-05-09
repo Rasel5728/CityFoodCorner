@@ -1,17 +1,19 @@
 package com.first.mainfrontpage;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
@@ -34,33 +36,30 @@ public class MenuController implements Initializable {
     private ScrollPane scrollbar;
     @FXML
     private GridPane menuGrid;
-
+    private int currentFoodCount=-1;
     private static double currentPrice= 0 ;
+
+    private int stock;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         removeScrollBar(scrollbar);
+        loadAllProducts();
+    }
+    //food count
 
-      //  setToTable("Burger","5","400"); // value works
-        try {
-            addlist(13);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void addFoodToMenu(String name, String price,byte[]image,int count) throws IOException {
+        System.out.println(name+ " "+price);
+        int col = count%2;
+        int row = count/2;
+        menuGrid.add(loadList(name,price,image),col,row);
     }
 
-    void addlist(int item) throws IOException {
-        for (int i = 0; i < item; i++) {
-            int col = i % 2;
-            int row = i / 2;
-            menuGrid.add(loadList(), col, row);
-        }
-    }
-
-    AnchorPane loadList() throws IOException {
+    AnchorPane loadList(String foodName, String foodPrice, byte[]imageBytes) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("foodCard.fxml"));
         AnchorPane card = loader.load();
         FoodCardController controller = loader.getController();
+        controller.setFoodValue(foodName,foodPrice,getImg(imageBytes));
         controller.setMenuController(this); // passing controller to food card for saving current state -_-
         return card;
     }
@@ -80,15 +79,16 @@ public class MenuController implements Initializable {
    }
 
    public void setToTable(String name, String quantity, String price){
-         indexMaping();
+        indexMaping();
         tablevVew.getItems().add(new String[]{name,quantity,price});
-        currentPrice+=Integer.parseInt(price);
+        currentPrice+=Double.parseDouble(price);
         totalField.setText(Double.toString(currentPrice));
+
    }
 
    @FXML
     private void  remove(){
-        tablevVew.getItems().clear();
+        tablevVew.getItems().remove(tablevVew.getSelectionModel().getSelectedItem());
         currentPrice = currentPrice - currentPrice;
         totalField.setText(Double.toString(currentPrice));
         changes.setText("0.0");
@@ -97,8 +97,91 @@ public class MenuController implements Initializable {
 
    @FXML
     private void pay(){
+        updateStock();
         changes.setText(Double.toString(Double.parseDouble(ammountField.getText()) - Double.parseDouble(totalField.getText())));
+        tablevVew.getItems().clear();
    }
 
+    private void loadAllProducts(){
+       menuGrid.getChildren().clear();
+        String sql= "SELECT * FROM products";
+        try(Statement stmt=DatabaseConnection.getConnection().createStatement();
+            ResultSet rs=stmt.executeQuery(sql)){
+            while(rs.next()){
+                currentFoodCount++;
+                System.out.println(rs.getString("product_name"));
+                addFoodToMenu(
+                        rs.getString("product_name"),
+                        String.valueOf(rs.getDouble("price")),
+                        rs.getBytes("image"),
+                        currentFoodCount
+                );
+            }
+        }catch (SQLException e){
+            System.out.println("error");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    private void getProductStock(String name) {
+        String sql = "SELECT stock FROM products WHERE product_name = ?";
+        try (PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                stock = rs.getInt("stock");
+            }
+        } catch (SQLException e) {
+            System.out.println("error: " + e.getMessage());
+        }
+    }
+
+    public void updateStock(String name,int n) {
+        String sql = "UPDATE products SET stock = ? WHERE product_name = ?";
+        try (PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            ps.setInt(1, n);
+            ps.setString(2, name);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error: " + e.getMessage());
+        }
+    }
+
+
+    public int getStck(String s){
+        getProductStock(s);
+        return stock;
+    }
+
+    Image getImg(byte[]imageBytes){
+        Image image = null;
+        if (imageBytes != null) {
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
+            image = new Image(bis);
+        }
+
+        // Set image to your ImageView
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(187);
+        imageView.setFitHeight(92);
+        imageView.setPreserveRatio(true);
+        if (image != null) {
+            imageView.setImage(image);
+        }
+        return image;
+    }
+
+    private void updateStock() {
+        for (Object item : tablevVew.getItems()) {
+            String[] row = (String[]) item;
+            String name     = row[0];
+            int quantity    = Integer.parseInt(row[1]);
+
+            int currentStock = getStck(name);
+            int newStock     = currentStock - quantity;
+
+            updateStock(name, Math.max(newStock, 0)); // prevent negative stock
+        }
+    }
 }

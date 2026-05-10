@@ -19,7 +19,7 @@
                   </Label>
                   <TableView fx:id="customers_tableView" layoutX="10.0" layoutY="48.0" prefHeight="475.0" prefWidth="674.0" tableMenuButtonVisible="true">
                     <columns>
-                      <TableColumn fx:id="customers_col_customerId" prefWidth="91.20001411437988" text="Customer ID" />
+                      <TableColumn fx:id="customers_col_customerProdutName" prefWidth="91.20001411437988" text="Product Name" />
                       <TableColumn fx:id="customers_col_total" prefWidth="67.19994354248047" text="Total" />
                         <TableColumn fx:id="customers_col_date" prefWidth="94.4000244140625" text="Date" />
                         <TableColumn fx:id="customers_col_cashier" prefWidth="94.4000244140625" text="Cashier" />

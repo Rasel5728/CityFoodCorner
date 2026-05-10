@@ -18,7 +18,7 @@ public class Customercontroller implements Initializable {
     private TableColumn<Customer, String> customers_col_cashier;
 
     @FXML
-    private TableColumn<Customer, String> customers_col_customerId;
+    private TableColumn<Customer, String> customers_col_customerProdutName;
 
     @FXML
     private TableColumn<Customer, String> customers_col_date;
@@ -47,7 +47,7 @@ public class Customercontroller implements Initializable {
         connection=DatabaseConnection.getConnection();
 
         //Bind table coloum
-        customers_col_customerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        customers_col_customerProdutName.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         customers_col_total.setCellValueFactory(new PropertyValueFactory<>("total"));
         customers_col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
         customers_col_cashier.setCellValueFactory(new PropertyValueFactory<>("cashier"));

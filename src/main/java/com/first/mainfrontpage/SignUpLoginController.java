@@ -191,6 +191,8 @@ public class SignUpLoginController implements Initializable{
         // taking data from each field
         String email = TFLemail.getText().trim();
         String password = PFLpassword.getText();
+        currentUser.email = email;
+        currentUser.userName = email.substring(0,email.indexOf('@'));
 
         // checking if all fields are filled or not
         if (email.isEmpty() && password.isEmpty()) {
@@ -219,6 +221,7 @@ public class SignUpLoginController implements Initializable{
 
             // yes: go to main page
             if (rs.next()) {
+
                 // clearing all field from log_in
                 TFLemail.clear();
                 PFLpassword.clear();

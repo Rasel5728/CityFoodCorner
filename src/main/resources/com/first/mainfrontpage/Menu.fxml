@@ -76,7 +76,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button layoutX="143.0" layoutY="466.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="107.0" styleClass="receipt-btn" stylesheets="@../CSSwithPicture/login.css" text="Receipt">
+                <Button layoutX="143.0" layoutY="466.0" mnemonicParsing="false" onAction="#receipt" prefHeight="34.0" prefWidth="107.0" styleClass="receipt-btn" stylesheets="@../CSSwithPicture/login.css" text="Receipt">
                     <graphic>
                         <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                             <image>

@@ -157,8 +157,6 @@ public class InventoryController implements Initializable {
             ps.setString(6,LocalDate.now().toString());
             ps.setString(7, inventory_productID.getText().trim());
 
-
-
             ps.executeUpdate();
             showAlert(Alert.AlertType.INFORMATION,"Success","Product added successfully");
             loadAllProducts();

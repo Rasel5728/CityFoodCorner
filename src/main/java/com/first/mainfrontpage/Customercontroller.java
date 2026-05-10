@@ -57,13 +57,13 @@ public class Customercontroller implements Initializable {
     //Create customer load method(Load data from database)
     public void loadCustomerData(){
         customerList.clear();
-        String sql="SELECT * FROM customers";
+        String sql="SELECT * FROM sellHistory";
 
         try(Statement stmt=connection.createStatement();
         ResultSet rs=stmt.executeQuery(sql)){
             while (rs.next()){
                 customerList.add(new Customer(
-                        rs.getString("customer_id"),
+                        rs.getString("product_name"),
                         rs.getDouble("total"),
                         rs.getString("date"),
                         rs.getString("cashier")

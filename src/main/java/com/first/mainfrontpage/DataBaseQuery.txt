@@ -30,3 +30,15 @@ CREATE TABLE IF NOT EXISTS customers (
     date DATE NOT NULL,
     cashier VARCHAR(100) NOT NULL
 );
+
+
+CREATE TABLE IF NOT EXISTS sellHistory (
+    sell_id      INT          AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    quantity     INT          NOT NULL DEFAULT 1,
+    price        DOUBLE       NOT NULL,
+    total        DOUBLE       NOT NULL,
+    date         DATE         NOT NULL,
+    cashier      INT          NOT NULL,
+    FOREIGN KEY (cashier) REFERENCES users(id)
+);

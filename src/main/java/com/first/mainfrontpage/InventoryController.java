@@ -13,12 +13,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
+
+    private MenuController menuController;
 
     //TABLE VIEW
     @FXML private TableView<Product>            inventory_tableView;
@@ -48,6 +52,10 @@ public class InventoryController implements Initializable {
 
     private final ObservableList<Product> productList= FXCollections.observableArrayList();
     private Connection connection;
+
+    public void setController(MenuController controller){
+        this.menuController = controller;
+    }
 
     //INITIALIZE CLASS
     @Override
@@ -105,10 +113,9 @@ public class InventoryController implements Initializable {
 
     //ADD ADD_BUTTON
     @FXML
-    void inventoryAddBtn(ActionEvent event) {
+    void inventoryAddBtn(ActionEvent event) throws IOException {
         if(!validateInputs()) return;
-
-        String sql = "INSERT INTO products VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO products VALUES (?, ?, ?, ?, ?, ?, ?,?)";
         try(PreparedStatement ps=connection.prepareStatement(sql)){
             ps.setString(1, inventory_productID.getText().trim());
             ps.setString(2, inventory_productName.getText().trim());
@@ -117,6 +124,8 @@ public class InventoryController implements Initializable {
             ps.setDouble(5,Double.parseDouble(inventory_price.getText().trim()));
             ps.setString(6,inventory_status.getValue());
             ps.setString(7,LocalDate.now().toString());
+            ps.setBytes(8, selectedImageBytes); // image bytes here
+
 
             ps.executeUpdate();
             showAlert(Alert.AlertType.INFORMATION,"Success","Product added successfully");
@@ -137,16 +146,17 @@ public class InventoryController implements Initializable {
             return;
         }
     if (!validateInputs()) return;
-    String sql="UPDATE products SET product_name=?,product_id=?,type=?,stock=?,price=?,status=?,date=?";
+    String sql="UPDATE products SET product_name=?,type=?,stock=?,price=?,status=?,date=? WHERE product_id = ?";
 
         try(PreparedStatement ps=connection.prepareStatement(sql)){
             ps.setString(1, inventory_productName.getText().trim());
-            ps.setString(2, inventory_productID.getText().trim());
-            ps.setString(3,inventory_type.getValue());
-            ps.setInt(4,Integer.parseInt(inventory_stock.getText().trim()));
-            ps.setDouble(5,Double.parseDouble(inventory_price.getText().trim()));
-            ps.setString(6,inventory_status.getValue());
-            ps.setString(7,LocalDate.now().toString());
+            ps.setString(2,inventory_type.getValue());
+            ps.setInt(3,Integer.parseInt(inventory_stock.getText().trim()));
+            ps.setDouble(4,Double.parseDouble(inventory_price.getText().trim()));
+            ps.setString(5,inventory_status.getValue());
+            ps.setString(6,LocalDate.now().toString());
+            ps.setString(7, inventory_productID.getText().trim());
+
 
 
             ps.executeUpdate();
@@ -194,16 +204,25 @@ public class InventoryController implements Initializable {
     }
 
     //IMPORT IMAGE METHOD
+    private byte[] selectedImageBytes; // class-level field to use when saving to DB
     @FXML
     void inventoryImportBtn(ActionEvent event) {
-        FileChooser fc=new FileChooser();
+        FileChooser fc = new FileChooser();
         fc.setTitle("Choose image file");
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image file","*.png","*.jpg","*.gif","*.jpeg"));
-        File file=fc.showOpenDialog(inventory_importBtn.getScene().getWindow());
-        if (file!=null){
-            inventory_imageView.setImage(new Image(file.toURI().toString()));
-        }
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image file", "*.png", "*.jpg", "*.gif", "*.jpeg"));
+        File file = fc.showOpenDialog(inventory_importBtn.getScene().getWindow());
 
+        if (file != null) {
+            // Display image in ImageView
+            inventory_imageView.setImage(new Image(file.toURI().toString()));
+
+            // Read image as bytes for DB storage
+            try {
+                selectedImageBytes = Files.readAllBytes(file.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //FILLFORM METHOD

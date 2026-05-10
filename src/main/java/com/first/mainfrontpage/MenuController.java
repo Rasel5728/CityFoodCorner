@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
@@ -99,7 +100,6 @@ public class MenuController implements Initializable {
     private void pay(){
         updateStock();
         changes.setText(Double.toString(Double.parseDouble(ammountField.getText()) - Double.parseDouble(totalField.getText())));
-        tablevVew.getItems().clear();
    }
 
     private void loadAllProducts(){
@@ -183,5 +183,48 @@ public class MenuController implements Initializable {
 
             updateStock(name, Math.max(newStock, 0)); // prevent negative stock
         }
+    }
+
+    //query
+    public void insertSellHistory(String productName, int quantity, double total, String date, String cashier) {
+        // Include the 'quantity' parameter in the SQL
+        String sql = "INSERT INTO sellHistory (product_name, quantity, total, date, cashier) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            pstmt.setString(1, productName);
+            pstmt.setInt(2, quantity); // Set the quantity
+            pstmt.setDouble(3, total);
+            pstmt.setString(4, date);
+            pstmt.setString(5, cashier); // The index is now 5
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Insert successful, rows affected: " + rowsAffected);
+            }
+        } catch (Exception e) {
+            System.out.println("Insert failed: " + e.getMessage());
+        }
+    }
+    public void processAndSave() {
+       String date = LocalDateTime.now().toString(); // current date and time
+
+        for (Object item : tablevVew.getItems()) {
+            String[] row = (String[]) item;           // cast Object to String[]
+            String productName = row[0];
+            String quantity = row[1];
+            double price       = Double.parseDouble(row[2]);
+
+            insertSellHistory(productName,Integer.parseInt(quantity),price,date,currentUser.userName);
+
+
+        }
+    }
+
+
+    @FXML
+    private void receipt(){
+        processAndSave();
+        tablevVew.getItems().clear();
     }
 }

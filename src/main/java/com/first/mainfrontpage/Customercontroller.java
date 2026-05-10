@@ -76,6 +76,10 @@ public class Customercontroller implements Initializable {
         }
     }
 
+    //check
+    public void dummy(String name, int total, String date, String cashier){
+        customerList.add(new Customer(name,total,date,cashier));
+    }
     //Create Table Refresh table
     public void refreshTable(){
         loadCustomerData();

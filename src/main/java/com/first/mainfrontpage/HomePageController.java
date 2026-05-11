@@ -66,6 +66,9 @@ public class HomePageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         user.setText(currentUser.userName);
+        String name = currentUser.userName;
+        String capitalized = name.substring(0, 1).toUpperCase() + name.substring(1);
+        user.setText(capitalized);
         FontIcon icon = new FontIcon("fa-sign-out");
         icon.setIconSize(12);
         logoutButton.setGraphic(icon);

@@ -207,7 +207,7 @@ public class MenuController implements Initializable {
         }
     }
     public void processAndSave() {
-       String date = LocalDateTime.now().toString(); // current date and time
+        String date = LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")); // current date and time
 
         for (Object item : tablevVew.getItems()) {
             String[] row = (String[]) item;           // cast Object to String[]

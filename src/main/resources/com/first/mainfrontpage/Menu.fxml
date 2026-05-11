@@ -51,23 +51,23 @@
                     </font>
                 </Text>
                 <Line endX="132.199951171875" endY="-3.0517578125E-5" layoutX="118.0" layoutY="388.0" smooth="false" startX="-100.0" stroke="#00000042" />
-                <Label layoutX="180.0" layoutY="285.0" prefHeight="18.0" prefWidth="65.0" text="       0.00 " textFill="DARKORANGE">
+                <Label fx:id="totalField" layoutX="180.0" layoutY="285.0" prefHeight="18.0" prefWidth="65.0" text="       0.00 " textFill="DARKORANGE">
                     <font>
                         <Font name="Arial Bold" size="15.0" />
                     </font>
                 </Label>
-                <TextField layoutX="129.0" layoutY="314.0" prefHeight="15.0" prefWidth="115.0" />
-                <Label layoutX="180.0" layoutY="350.0" prefHeight="18.0" prefWidth="65.0" text="       0.00 " textFill="#068025ed">
+                <TextField fx:id="ammountField" layoutX="129.0" layoutY="314.0" prefHeight="15.0" prefWidth="115.0" />
+                <Label fx:id="changes" layoutX="180.0" layoutY="350.0" prefHeight="18.0" prefWidth="65.0" text="       0.00 " textFill="#068025ed">
                     <font>
                         <Font name="Arial Bold" size="15.0" />
                     </font>
                 </Label>
-                <Button layoutX="16.0" layoutY="405.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="234.0" styleClass="pay-btn" stylesheets="@../CSSwithPicture/login.css" text="  Pay">
+                <Button layoutX="16.0" layoutY="405.0" mnemonicParsing="false" onAction="#pay" prefHeight="18.0" prefWidth="234.0" styleClass="pay-btn" stylesheets="@../CSSwithPicture/login.css" text="  Pay">
                     <font>
                         <Font size="17.0" />
                     </font>
                 </Button>
-                <Button layoutX="18.0" layoutY="466.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" styleClass="remove-btn" stylesheets="@../CSSwithPicture/login.css" text="Remove">
+                <Button layoutX="18.0" layoutY="466.0" mnemonicParsing="false" onAction="#remove" prefHeight="35.0" prefWidth="115.0" styleClass="remove-btn" stylesheets="@../CSSwithPicture/login.css" text="Remove">
                     <graphic>
                         <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -76,7 +76,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button layoutX="143.0" layoutY="466.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="107.0" styleClass="receipt-btn" stylesheets="@../CSSwithPicture/login.css" text="Receipt">
+                <Button layoutX="143.0" layoutY="466.0" mnemonicParsing="false" onAction="#receipt" prefHeight="34.0" prefWidth="107.0" styleClass="receipt-btn" stylesheets="@../CSSwithPicture/login.css" text="Receipt">
                     <graphic>
                         <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                             <image>

@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.Objects;
@@ -16,6 +18,8 @@ public class FoodCardController implements Initializable {
     private Label foodPrice;
     @FXML
     private Label countFood;
+    @FXML
+    private ImageView foodImage;
 
     private MenuController controller;
 
@@ -38,14 +42,23 @@ public class FoodCardController implements Initializable {
 
     public void increamentFoodCount(ActionEvent actionEvent) {
         int x = Integer.parseInt(countFood.getText());
-        x=x+1;
+        if(controller.getStck(foodName.getText())>x) x++;
         countFood.setText(Integer.toString(x));
+    }
+
+    public void setFoodValue(String name, String price, Image image){
+        foodName.setText(name);
+        foodPrice.setText(price);
+        foodImage.setImage(image);
     }
 
     public void addFood(ActionEvent actionEvent) {
         //okaj
-        if(!Objects.equals(countFood.getText(), "0")) controller.setToTable(foodName.getText(),countFood.getText(),foodPrice.getText());
-
+        String name = foodName.getText();
+        String count = countFood.getText();
+        String price = Double.toString(Double.parseDouble(foodPrice.getText()) * Integer.parseInt(count));
+        controller.setToTable(name,count,price);
+        countFood.setText("0");
     }
 
 }

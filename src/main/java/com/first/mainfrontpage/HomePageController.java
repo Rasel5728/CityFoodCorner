@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -17,6 +18,8 @@ public class HomePageController implements Initializable {
     private Button logoutButton;
     @FXML
     private AnchorPane contentPane;
+    @FXML
+    private Label user;
 
     @FXML
     void customers(ActionEvent event) throws IOException {
@@ -62,6 +65,7 @@ public class HomePageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        user.setText(currentUser.userName);
         FontIcon icon = new FontIcon("fa-sign-out");
         icon.setIconSize(12);
         logoutButton.setGraphic(icon);

@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="174.0" prefWidth="206.0" styleClass="foodcardanc" stylesheets="@../MenuPicture/MenuTab.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.FoodCardController">
     <children>
-        <ImageView fitHeight="92.0" fitWidth="187.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true">
+        <ImageView fx:id="foodImage" fitHeight="92.0" fitWidth="187.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true">
             <image>
                 <Image url="@../MenuPicture/burger.jpg" />
             </image>
@@ -38,7 +38,7 @@
                 </Button>
             </children>
         </AnchorPane>
-        <Label fx:id="foodPrice" layoutX="170.0" layoutY="107.0" prefHeight="18.0" prefWidth="29.0" text="350" textFill="DARKORANGE">
+        <Label fx:id="foodPrice" alignment="CENTER_RIGHT" layoutX="109.0" layoutY="107.0" prefHeight="18.0" prefWidth="87.0" text="350" textFill="DARKORANGE">
             <font>
                 <Font name="Arial Bold" size="14.0" />
             </font>

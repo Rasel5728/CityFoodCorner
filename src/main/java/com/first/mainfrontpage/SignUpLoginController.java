@@ -16,13 +16,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class SignUpLoginController implements Initializable{
+public class SignUpLoginController implements Initializable {
 
     // animation logic start
-    @FXML
-    private Button resisterBtn; //Create New Account
-    @FXML
-    private AnchorPane slidePane;
+    @FXML private Button     resisterBtn; // "Create New Account" button
+    @FXML private AnchorPane slidePane;
 
     boolean clicked = false;
     @FXML
@@ -30,31 +28,31 @@ public class SignUpLoginController implements Initializable{
         anim();
         changeButtonText();
     }
-    void anim(){
+
+    void anim() {
         TranslateTransition transition = new TranslateTransition();
         transition.setNode(slidePane);
         transition.setDuration(Duration.millis(250));
 
-        if(clicked==false){
+        if (clicked == false) {
             transition.setByX(420);
-        }
-        else{
+        } else {
             transition.setByX(-420);
         }
         transition.play();
         clicked = !clicked;
     }
-    void changeButtonText(){
-        if(clicked==false){
+
+    void changeButtonText() {
+        if (clicked == false) {
             resisterBtn.setText("Create New Account");
-        }
-        else{
+        } else {
             resisterBtn.setText("Sign In");
         }
     }
     // animation logic close
 
-    // alert showing method start
+    // alert helper method
     void showAlert(Alert.AlertType type, String title, String message) {
         Alert al = new Alert(type);
         al.setTitle(title);
@@ -62,43 +60,35 @@ public class SignUpLoginController implements Initializable{
         al.setContentText(message);
         al.showAndWait();
     }
-    // alert showing method close
-
-    // sign up page logic start
-    @FXML
-    private TextField TFRemail;
-    @FXML
-    private PasswordField PFRpassword;
-    @FXML
-    private ComboBox<String> CBRquestion;
-    @FXML
-    private TextField TFRrecovaryAnswer;
-
+    // helper close
+    // turn off auto fucus
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // adding comment box question
-        CBRquestion.getItems().add("What is your favorite food?");
-        CBRquestion.getItems().add("What is your laptop brand name?");
-        CBRquestion.getItems().add("What is your mobile brand name?");
-        CBRquestion.getItems().add("What is your least favorite food?");
-
         Platform.runLater(() -> slidePane.requestFocus());
     }
 
-    @FXML
-    private void register(ActionEvent event){
-        // taking data from each field
-        String email = TFRemail.getText().trim();
-        String password = PFRpassword.getText();
-        String question = CBRquestion.getValue();
-        String answer = TFRrecovaryAnswer.getText().trim();
+    // sign up logic start
 
-        // checking if all fields are filled or not
-        if (email.isEmpty() && password.isEmpty() && question == null && answer.isEmpty()) {
+    @FXML private TextField     TFRemail;
+    @FXML private PasswordField PFRpassword;
+    @FXML private PasswordField PFRrepassword;
+    @FXML private TextField     TFRmobile;
+
+    @FXML
+    private void register(ActionEvent event) {
+        // taking all data from filled
+        String email     = TFRemail.getText().trim();
+        String password  = PFRpassword.getText();
+        String repassword = PFRrepassword.getText();
+        String mobile    = TFRmobile.getText();
+
+        // checking empty filled (total)
+        if (email.isEmpty() && password.isEmpty() && repassword.isEmpty() && mobile.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Warning", "Please fill all of the fields");
             return;
         }
-        // checking individual fields filled or not
+
+        // checking empty filled (individually)
         if (email.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Warning", "Enter your email");
             return;
@@ -107,99 +97,105 @@ public class SignUpLoginController implements Initializable{
             showAlert(Alert.AlertType.WARNING, "Warning", "Enter a password");
             return;
         }
-        if (question == null) {
-            showAlert(Alert.AlertType.WARNING, "Warning", "Security question is not selected");
+        if (repassword.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Re-type your password");
             return;
         }
-        if (answer.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Warning", "Enter your recovery answer");
+        if (mobile.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Enter your mobile number");
             return;
         }
 
-        // checking email and password validity
-        String validEmail = "^[a-z0-9_]+@gmail\\.com$";
-        if (!email.matches(validEmail)) {
-            showAlert(Alert.AlertType.WARNING, "Invalid Email", "Please enter a valid Gmail address (e.g: example@gmail.com)");
+        // pass vs re-pass
+        if (!password.equals(repassword)) {
+            showAlert(Alert.AlertType.WARNING, "Password Mismatch", "Passwords do not match");
             return;
         }
+
+        // checking valid email
+        String validEmail = "^[a-z0-9_]+@gmail\\.com$";
+        if (!email.matches(validEmail)) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Email", "Please enter a valid Gmail address");
+            return;
+        }
+
+        // password exception
         if (password.length() < 6) {
-            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must be contain at least 6 character");
+            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must contain at least 6 characters");
             return;
         }
         String strongPass = ".*[!@#$%&*_?].*";
         if (!password.matches(strongPass)) {
-            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must be contain at least one special character");
+            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must contain at least one special character");
             return;
         }
-        // checked
-        try{ // building connection with database
+
+        // checking valid mobile number
+        if (!mobile.matches("^[0-9]{11}$")) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Mobile", "Mobile number must be 11 digits");
+            return;
+        }
+
+        try { // taking database connection
             Connection ctn = DatabaseConnection.getConnection();
 
-            // checking if the email is already registered or not
+            // checking already existed email
             String chkData = "SELECT email FROM users WHERE email = ?";
             PreparedStatement chkSmt = ctn.prepareStatement(chkData);
             chkSmt.setString(1, email);
             ResultSet rs = chkSmt.executeQuery();
 
-            // yes: stop registration process
+            // exist -> no reg
             if (rs.next()) {
                 showAlert(Alert.AlertType.ERROR, "Error", "This email is already registered.");
                 ctn.close();
                 return;
             }
-
-            // no: add new data into database
-            String inData = "INSERT INTO users (email, password, security_question, security_answer) " + "VALUES (?, ?, ?, ?)";
+            // not exist -> reg -> add new user as "pending"
+            String inData = "INSERT INTO users (email, password, mobile, status) VALUES (?, ?, ?, 'pending')";
             PreparedStatement inSmt = ctn.prepareStatement(inData);
             inSmt.setString(1, email);
             inSmt.setString(2, password);
-            inSmt.setString(3, question);
-            inSmt.setString(4, answer);
+            inSmt.setString(3, mobile);
             inSmt.executeUpdate();
 
-            // account successfully created info
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Account created successfully! Please log in.");
+            // new account created
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Account created successfully! Please wait for admin approval before logging in.");
 
-            // clearing all field for new registration
             TFRemail.clear();
             PFRpassword.clear();
-            CBRquestion.setValue(null);
-            TFRrecovaryAnswer.clear();
+            PFRrepassword.clear();
+            TFRmobile.clear();
 
-            // slide pane animation for sign_in
             if (clicked == true) {
                 anim();
                 changeButtonText();
             }
-            ctn.close();
+            ctn.close(); // closing database connection
 
-        }catch (SQLException e) {
-            // Database connection issue
+        } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Could not connect to database. " + e.getMessage());
         }
     }
-    // sign up page logic close
+    // signup logic close
 
+    // sign in logic start
+    @FXML private TextField  TFLemail;
+    @FXML private PasswordField PFLpassword;
 
-    // sign in page logic start
     @FXML
-    private TextField TFLemail;
-    @FXML
-    private PasswordField PFLpassword;
-
     public void signIn(ActionEvent event) throws IOException {
-        // taking data from each field
+        // taking data from fields
         String email = TFLemail.getText().trim();
         String password = PFLpassword.getText();
-        currentUser.email = email;
-        currentUser.userName = email.substring(0,email.indexOf('@'));
 
-        // checking if all fields are filled or not
+        // checking empty filled (total)
         if (email.isEmpty() && password.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Warning", "Please fill all of the fields.");
             return;
         }
-        // checking every field filled or not
+
+        // checking empty filled (individually)
         if (email.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Warning", "Enter your email");
             return;
@@ -208,41 +204,62 @@ public class SignUpLoginController implements Initializable{
             showAlert(Alert.AlertType.WARNING, "Warning", "Enter your password");
             return;
         }
-        // checked
-        try {// building connection with database
+
+        try {// taking database connection
             Connection cnt = DatabaseConnection.getConnection();
 
-            // checking if the email and password are matched or not
+            // checking email & password in database
             String chkData = "SELECT * FROM users WHERE email = ? AND password = ?";
             PreparedStatement chkSmt = cnt.prepareStatement(chkData);
             chkSmt.setString(1, email);
             chkSmt.setString(2, password);
             ResultSet rs = chkSmt.executeQuery();
 
-            // yes: go to main page
-            if (rs.next()) {
+            if (rs.next()) { // checked -> check status
+                String status = rs.getString("status");
 
-                // clearing all field from log_in
+                if (status.equals("pending")) {
+                    showAlert(Alert.AlertType.WARNING, "Pending Approval", "Please wait for admin approval");
+                    cnt.close();
+                    return;
+                }
+
+                if (status.equals("blocked")) {
+                    showAlert(Alert.AlertType.ERROR, "Account Blocked", "Your account has been blocked");
+                    cnt.close();
+                    return;
+                }
+
+                // status == approved
+                currentUser.email = email;
+                currentUser.userName = email.substring(0, email.indexOf('@'));
+
+                // last_login time update
+                String updateLogin = "UPDATE users SET last_login = NOW() WHERE email = ?";
+                PreparedStatement updateSmt = cnt.prepareStatement(updateLogin);
+                updateSmt.setString(1, email);
+                updateSmt.executeUpdate();
+
                 TFLemail.clear();
                 PFLpassword.clear();
-                cnt.close();
+
+                cnt.close();// database connection close
 
                 SwitchScene switchScene = new SwitchScene();
                 switchScene.switchscene(event, "MainFront.fxml");
 
             } else {
-                // no: login failed
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");
                 cnt.close();
             }
+
         } catch (SQLException e) {
-            // Database connection issue
             showAlert(Alert.AlertType.ERROR, "Database Error", "Could not connect to database. " + e.getMessage());
         }
     }
-// sign in page logic close
+    // sign in logic close
 
-// forgot password logic start
+    // forgot password logic start
     @FXML
     void forgotPassword(ActionEvent event) {
 
@@ -251,7 +268,6 @@ public class SignUpLoginController implements Initializable{
         emailDialog.setTitle("Forgot Password");
         emailDialog.setHeaderText(null);
         emailDialog.setContentText("Enter your registered email:");
-
         String email = emailDialog.showAndWait().orElse("").trim();
 
         if (email.isEmpty()) {
@@ -259,54 +275,83 @@ public class SignUpLoginController implements Initializable{
             return;
         }
 
-        try { // building connection with database
+        // taking mobile number
+        TextInputDialog mobileDialog = new TextInputDialog();
+        mobileDialog.setTitle("Forgot Password");
+        mobileDialog.setHeaderText(null);
+        mobileDialog.setContentText("Enter your registered mobile number:");
+        String mobile = mobileDialog.showAndWait().orElse("").trim();
+
+        if (mobile.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Warning", "Mobile number field cannot be empty");
+            return;
+        }
+
+        try {// taking database connection
             Connection cnt = DatabaseConnection.getConnection();
 
-            // checking if the email matched or not
-            String chkData = "SELECT security_question FROM users WHERE email = ?";
+            // check email and mobile im database
+            String chkData = "SELECT * FROM users WHERE email = ? AND mobile = ?";
             PreparedStatement chkSmt = cnt.prepareStatement(chkData);
             chkSmt.setString(1, email);
+            chkSmt.setString(2, mobile);
             ResultSet rs = chkSmt.executeQuery();
-            // no: no access
+            // not exist -> out
             if (!rs.next()) {
-                showAlert(Alert.AlertType.ERROR, "Not Found", "No account found with this email.");
-                cnt.close();
-                return;
-            }
-            // yes: find security question by email
-            String securityQuestion = rs.getString("security_question");
-
-            TextInputDialog ansDialog = new TextInputDialog();
-            ansDialog.setTitle("Forgot Password");
-            ansDialog.setHeaderText(null);
-            ansDialog.setContentText(securityQuestion);
-
-            String answer = ansDialog.showAndWait().get();
-            // no answer alert
-            if (answer.isEmpty()) {
-                showAlert(Alert.AlertType.WARNING, "Warning", "Answer field cannot be empty.");
+                showAlert(Alert.AlertType.ERROR, "Not Found", "No account found");
                 cnt.close();
                 return;
             }
 
-            // find pass by ans
-            String chkAns = "SELECT password FROM users WHERE security_answer = ?";
-            PreparedStatement chkStmt = cnt.prepareStatement(chkAns);
-            chkStmt.setString(1, answer);
-            ResultSet rs1 = chkStmt.executeQuery();
+            // exist -> take new pass
+            TextInputDialog newPassDialog = new TextInputDialog();
+            newPassDialog.setTitle("Reset Password");
+            newPassDialog.setHeaderText(null);
+            newPassDialog.setContentText("Enter your new password:");
+            String newPassword = newPassDialog.showAndWait().orElse("").trim();
 
-            if (rs1.next()) {
-                String storedPassword = rs1.getString("password");
-                showAlert(Alert.AlertType.INFORMATION, "Your Password", "Your password is: " + storedPassword);
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Wrong Answer", "Security answer does not match.");
+            if (newPassword.isEmpty()) {
+                showAlert(Alert.AlertType.WARNING, "Warning", "Password field cannot be empty");
+                cnt.close();
+                return;
             }
-            cnt.close();
+
+            if (newPassword.length() < 6) {
+                showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must contain at least 6 characters");
+                cnt.close();
+                return;
+            }
+            String strongPass = ".*[!@#$%&*_?].*";
+            if (!newPassword.matches(strongPass)) {
+                showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must contain at least one special character");
+                cnt.close();
+                return;
+            }
+            // update database for new pass
+            String updatePass = "UPDATE users SET password = ? WHERE email = ?";
+            PreparedStatement updateSmt = cnt.prepareStatement(updatePass);
+            updateSmt.setString(1, newPassword);
+            updateSmt.setString(2, email);
+            updateSmt.executeUpdate();
+
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Password has been reset successfully! You can now log in with your new password.");
+
+            cnt.close(); // close connection
 
         } catch (SQLException e) {
-            // Database connection issue
             showAlert(Alert.AlertType.ERROR, "Database Error", "Could not connect to database. " + e.getMessage());
         }
     }
-// forgot password logic close
+    // forgot pass logic close
+
+    // Admin btn
+    @FXML
+    void administratorbtn(ActionEvent event) {
+        try {
+            SwitchScene switchScene = new SwitchScene();
+            switchScene.switchscene(event, "AdminLogin.fxml");
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not open Admin Login page. " + e.getMessage());
+        }
+    }
 }

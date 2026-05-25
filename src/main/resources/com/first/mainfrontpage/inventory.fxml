@@ -7,9 +7,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="550.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.InventoryController">
    <children>
@@ -17,9 +19,9 @@
          <children>
 
             <!-- TABLE -->
-            <AnchorPane layoutX="12.0" layoutY="9.0" prefHeight="283.0" prefWidth="691.0" styleClass="shadow" stylesheets="@../Alpha/inventoryDesign.css">
+            <AnchorPane layoutX="12.0" layoutY="6.0" prefHeight="326.0" prefWidth="691.0" styleClass="shadow" stylesheets="@../Alpha/inventoryDesign.css">
                <children>
-                  <TableView fx:id="inventory_tableView" layoutX="8.0" layoutY="9.0" prefHeight="266.0" prefWidth="674.0" stylesheets="@../Alpha/inventoryDesign.css" tableMenuButtonVisible="true">
+                  <TableView fx:id="inventory_tableView" layoutX="8.0" layoutY="51.0" prefHeight="266.0" prefWidth="674.0" stylesheets="@../Alpha/inventoryDesign.css" tableMenuButtonVisible="true">
                      <columns>
                         <TableColumn fx:id="inventory_col_productID" prefWidth="75.0" text="Product ID" />
                         <TableColumn fx:id="inventory_col_productName" prefWidth="100.0" text="Product Name" />
@@ -33,65 +35,111 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
+                  <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCT INVENTORY">
+                     <font>
+                        <Font name="Arial Bold" size="22.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutX="335.0" layoutY="13.0" prefHeight="32.0" prefWidth="338.0" style="-fx-background-color: #ffff; -fx-background-radius: 7; -fx-border-color: #FFB333; -fx-border-radius: 7;">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="6.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSSwithPicture/search.png" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="283.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="58.0" styleClass="cart" stylesheets="@../CSSwithPicture/login.css" text="Search" />
+                        <TextField fx:id="serach" layoutX="26.0" layoutY="3.0" prefHeight="26.0" prefWidth="254.0" promptText="Search by Product ID or Name" styleClass="text-field" stylesheets="@../Alpha/inventoryDesign.css" />
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
 
             <!-- FORM -->
-            <AnchorPane fx:id="inventory_form" layoutX="13.0" layoutY="312.0" prefHeight="228.0" prefWidth="691.0" styleClass="shadow" stylesheets="@../Alpha/inventoryDesign.css">
+            <AnchorPane fx:id="inventory_form" layoutX="13.0" layoutY="344.0" prefHeight="200.0" prefWidth="691.0" styleClass="shadow" stylesheets="@../Alpha/inventoryDesign.css">
                <children>
 
-                  <Label layoutX="14.0" layoutY="36.0" text="Product ID:">
+                  <Label layoutX="15.0" layoutY="24.0" text="Product ID:">
                      <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="inventory_productID" layoutX="121.0" layoutY="34.0" prefHeight="26.0" prefWidth="156.0" />
+                  <TextField fx:id="inventory_productID" layoutX="122.0" layoutY="22.0" prefHeight="23.0" prefWidth="150.0" promptText="CFC- 0_" styleClass="text" stylesheets="@../Alpha/inventoryDesign.css" />
 
-                  <Label layoutX="14.0" layoutY="73.0" text="Product Name:">
+                  <Label layoutX="15.0" layoutY="61.0" text="Product Name:">
                      <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="inventory_productName" layoutX="121.0" layoutY="71.0" prefHeight="26.0" prefWidth="156.0" />
+                  <TextField fx:id="inventory_productName" layoutX="122.0" layoutY="59.0" prefHeight="23.0" prefWidth="150.0" styleClass="text" stylesheets="@../Alpha/inventoryDesign.css" />
 
-                  <Label layoutX="15.0" layoutY="110.0" text="Type:">
+                  <Label layoutX="16.0" layoutY="98.0" text="Type:">
                      <font><Font size="15.0" /></font>
                   </Label>
-                  <ComboBox fx:id="inventory_type" layoutX="121.0" layoutY="109.0" prefHeight="26.0" prefWidth="156.0" promptText="Choose Type..." />
+                  <ComboBox fx:id="inventory_type" layoutX="122.0" layoutY="97.0" prefHeight="23.0" prefWidth="150.0" promptText="Choose Type..." />
 
-                  <Label layoutX="303.0" layoutY="36.0" text="Stock:">
+                  <Label layoutX="296.0" layoutY="24.0" text="Stock:">
                      <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="inventory_stock" layoutX="355.0" layoutY="33.0" prefHeight="26.0" prefWidth="156.0" promptText="0" />
+                  <TextField fx:id="inventory_stock" layoutX="348.0" layoutY="21.0" prefHeight="23.0" prefWidth="150.0" promptText="0" styleClass="text" stylesheets="@../Alpha/inventoryDesign.css" />
 
-                  <Label layoutX="305.0" layoutY="73.0" text="Price:">
+                  <Label layoutX="298.0" layoutY="61.0" text="Price:">
                      <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="inventory_price" layoutX="355.0" layoutY="71.0" prefHeight="26.0" prefWidth="156.0" promptText="0.0" />
+                  <TextField fx:id="inventory_price" layoutX="348.0" layoutY="59.0" prefHeight="23.0" prefWidth="150.0" promptText="0.0" styleClass="text" stylesheets="@../Alpha/inventoryDesign.css" />
 
-                  <Label layoutX="305.0" layoutY="111.0" text="Status:">
+                  <Label layoutX="298.0" layoutY="99.0" text="Status:">
                      <font><Font size="15.0" /></font>
                   </Label>
-                  <ComboBox fx:id="inventory_status" layoutX="355.0" layoutY="108.0" prefHeight="26.0" prefWidth="156.0" promptText="Choose Status..." />
-
-                  <!-- Image Box -->
-                  <AnchorPane layoutX="550.0" layoutY="11.0" prefHeight="146.0" prefWidth="130.0" styleClass="shadow" stylesheets="@../Alpha/inventoryDesign.css">
-                     <children>
-                        <ImageView fx:id="inventory_imageView" fitHeight="136.0" fitWidth="120.0" layoutX="-1.0" layoutY="9.0" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
+                  <ComboBox fx:id="inventory_status" layoutX="348.0" layoutY="96.0" prefHeight="23.0" prefWidth="150.0" promptText="Choose Status..." />
 
                   <!-- Buttons -->
-                  <Button fx:id="inventory_addBtn" layoutX="97.0" layoutY="175.0" onAction="#inventoryAddBtn" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Add" />
+                  <Button fx:id="inventory_addBtn" layoutX="31.0" layoutY="144.0" onAction="#inventoryAddBtn" prefHeight="36.0" prefWidth="106.0" style="-fx-background-radius: 8;" styleClass="confirm-btn" stylesheets="@../CSSwithPicture/admin.css" text="Add">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSSwithPicture/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
 
-                  <Button fx:id="inventory_updateBtn" layoutX="194.0" layoutY="175.0" onAction="#inventoryUpdateBtn" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Update" />
+                  <Button fx:id="inventory_updateBtn" layoutX="161.0" layoutY="144.0" onAction="#inventoryUpdateBtn" prefHeight="36.0" prefWidth="106.0" style="-fx-background-radius: 8;" styleClass="confirm-btn" stylesheets="@../CSSwithPicture/admin.css" text="Update">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSSwithPicture/loop.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
 
-                  <Button fx:id="inventory_clearBtn" layoutX="292.0" layoutY="175.0" onAction="#inventoryClearBtn" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Clear" />
+                  <Button fx:id="inventory_clearBtn" layoutX="291.0" layoutY="144.0" onAction="#inventoryClearBtn" prefHeight="36.0" prefWidth="106.0" style="-fx-background-radius: 8;" styleClass="delete-btn" stylesheets="@../CSSwithPicture/admin.css" text="Clear">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSSwithPicture/clear.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
 
-                  <Button layoutX="392.0" layoutY="175.0" onAction="#inventoryDeleteBtn" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Delete" />
+                  <Button layoutX="423.0" layoutY="144.0" onAction="#inventoryDeleteBtn" prefHeight="36.0" prefWidth="106.0" style="-fx-background-radius: 8;" styleClass="delete-btn" stylesheets="@../CSSwithPicture/admin.css" text="Delete">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSSwithPicture/trash.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
 
-                  <Button fx:id="inventory_importBtn" layoutX="573.0" layoutY="175.0" onAction="#inventoryImportBtn" prefHeight="36.0" prefWidth="84.0" style="-fx-background-radius: 8;" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Import" />
+                  <Button fx:id="inventory_importBtn" layoutX="554.0" layoutY="144.0" onAction="#inventoryImportBtn" prefHeight="36.0" prefWidth="106.0" style="-fx-background-radius: 8;" styleClass="confirm-btn" stylesheets="@../CSSwithPicture/admin.css" text="Import">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSSwithPicture/import.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <AnchorPane layoutX="523.0" layoutY="18.0" prefHeight="105.0" prefWidth="155.0" styleClass="shadow" stylesheets="@../Alpha/inventoryDesign.css" />
+                  <ImageView fx:id="inventory_imageView" fitHeight="85.0" fitWidth="140.0" layoutX="536.0" layoutY="29.0" preserveRatio="true" />
 
                </children>
             </AnchorPane>
 
-            <Separator layoutX="14.0" layoutY="296.8" prefHeight="8.0" prefWidth="691.0" AnchorPane.bottomAnchor="245.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="297.0" />
+            <Separator layoutX="14.4" layoutY="333.0" prefHeight="8.0" prefWidth="691.0" AnchorPane.bottomAnchor="208.60000000000002" AnchorPane.leftAnchor="14.4" AnchorPane.rightAnchor="11.200000000000045" AnchorPane.topAnchor="333.0" />
 
          </children>
       </AnchorPane>

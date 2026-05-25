@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="550.0" prefWidth="950.0" style="-fx-background-color: #f5efda;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first.mainfrontpage.AdminPanelController">
+   <children>
+      <Text layoutX="44.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salesman Account Control">
+         <font>
+            <Font name="Arial Narrow" size="28.0" />
+         </font>
+      </Text>
+      <AnchorPane layoutX="43.0" layoutY="49.0" prefHeight="85.0" prefWidth="185.0" style="-fx-background-color: #ffff; -fx-background-radius: 10;" />
+      <ImageView fitHeight="48.0" fitWidth="58.0" layoutX="58.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../CSSwithPicture/team.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="57.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Salesman">
+         <font>
+            <Font name="Arial Narrow Bold" size="14.0" />
+         </font>
+      </Text>
+      <Label fx:id="totalSalesman" layoutX="155.0" layoutY="75.0" prefHeight="48.0" prefWidth="56.0" text="25">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="269.0" layoutY="49.0" prefHeight="85.0" prefWidth="185.0" style="-fx-background-color: #ffff; -fx-background-radius: 10;" />
+      <ImageView fitHeight="48.0" fitWidth="45.0" layoutX="283.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../CSSwithPicture/expired.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="282.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending">
+         <font>
+            <Font name="Arial Narrow Bold" size="14.0" />
+         </font>
+      </Text>
+      <Label fx:id="pendingRequest" layoutX="380.0" layoutY="75.0" prefHeight="48.0" prefWidth="56.0" text="12">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="495.0" layoutY="49.0" prefHeight="85.0" prefWidth="185.0" style="-fx-background-color: #ffff; -fx-background-radius: 10;" />
+      <ImageView fitHeight="48.0" fitWidth="58.0" layoutX="510.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../CSSwithPicture/approved.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="509.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Approved">
+         <font>
+            <Font name="Arial Narrow Bold" size="14.0" />
+         </font>
+      </Text>
+      <Label fx:id="approved" layoutX="607.0" layoutY="75.0" prefHeight="48.0" prefWidth="56.0" text="20">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="721.0" layoutY="49.0" prefHeight="85.0" prefWidth="185.0" style="-fx-background-color: #ffff; -fx-background-radius: 10;" />
+      <ImageView fitHeight="48.0" fitWidth="58.0" layoutX="736.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../CSSwithPicture/people.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="735.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blocked">
+         <font>
+            <Font name="Arial Narrow Bold" size="14.0" />
+         </font>
+      </Text>
+      <Label fx:id="blocked" layoutX="833.0" layoutY="75.0" prefHeight="48.0" prefWidth="56.0" text="10">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="41.0" layoutY="143.0" prefHeight="360.0" prefWidth="868.0" style="-fx-background-color: #ffff; -fx-background-radius: 10;">
+         <children>
+            <TableView fx:id="regSalesmanList" layoutX="22.0" layoutY="36.0" prefHeight="258.0" prefWidth="822.0" stylesheets="@../CSSwithPicture/login.css">
+              <columns>
+                <TableColumn prefWidth="182.39996337890625" text="Email" />
+                <TableColumn prefWidth="148.8000030517578" text="Mobile Number" />
+                  <TableColumn prefWidth="199.199951171875" text="Joined On" />
+                  <TableColumn prefWidth="140.79998779296875" text="Status" />
+                  <TableColumn prefWidth="154.4000244140625" text="Last Login" />
+              </columns>
+            </TableView>
+            <Button layoutX="79.0" layoutY="305.0" mnemonicParsing="false" onAction="#confirmbtn" prefHeight="30.0" prefWidth="140.0" styleClass="confirm-btn" stylesheets="@../CSSwithPicture/admin.css" text=" Confirm">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../CSSwithPicture/selected.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="270.0" layoutY="305.0" mnemonicParsing="false" onAction="#blockbtn" prefHeight="32.0" prefWidth="140.0" styleClass="delete-btn" stylesheets="@../CSSwithPicture/admin.css" text="  Block">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../CSSwithPicture/block.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="651.0" layoutY="305.0" mnemonicParsing="false" onAction="#deletebtn" prefHeight="32.0" prefWidth="140.0" styleClass="delete-btn" stylesheets="@../CSSwithPicture/admin.css" text="  Delete">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../CSSwithPicture/delete-user.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="459.0" layoutY="305.0" mnemonicParsing="false" onAction="#rejoinbtn" prefHeight="30.0" prefWidth="140.0" styleClass="confirm-btn" stylesheets="@../CSSwithPicture/admin.css" text=" Re-Join">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../CSSwithPicture/puzzle.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Text layoutX="67.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registerd Salesman List ">
+         <font>
+            <Font name="Arial Narrow" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="781.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logedin as: Administator ">
+         <font>
+            <Font name="Arial Narrow" size="14.0" />
+         </font>
+      </Text>
+      <Button layoutX="41.0" layoutY="510.0" mnemonicParsing="false" onAction="#goTologinMainpagebtn" prefHeight="32.0" prefWidth="45.0" styleClass="hide-btn" stylesheets="@../CSSwithPicture/admin.css">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSSwithPicture/exit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="760.0" layoutY="523.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../CSSwithPicture/user.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

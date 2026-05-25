@@ -87,11 +87,18 @@
                 </Button>
                 <AnchorPane layoutX="-428.0" layoutY="3.0" prefHeight="74.0" prefWidth="423.0" styleClass="topanchor" stylesheets="@../CSSwithPicture/login.css">
                     <children>
-                        <Text fill="WHITE" layoutX="162.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add to Tray">
+                        <Text fill="WHITE" layoutX="10.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MENU">
                             <font>
-                                <Font name="Arial Bold" size="18.0" />
+                                <Font name="Arial Bold" size="20.0" />
                             </font>
                         </Text>
+                  <AnchorPane layoutX="196.8" layoutY="3.0" prefHeight="30.0" prefWidth="218.0" style="-fx-background-color: #ffff; -fx-background-radius: 4; -fx-border-color: #F7D497; -fx-border-radius: 4;" AnchorPane.bottomAnchor="39.4" AnchorPane.leftAnchor="196.8" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="3.0">
+                     <children>
+                        <Button fx:id="search" layoutX="157.0" layoutY="2.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Search" />
+                        <TextField fx:id="search" layoutX="28.0" prefHeight="30.0" prefWidth="161.0" promptText="Search Menu Item..." styleClass="text-field" stylesheets="@../Alpha/inventoryDesign.css" />
+                        <AnchorPane fx:id="search" layoutX="134.0" layoutY="-5.0" />
+                     </children>
+                  </AnchorPane>
                     </children>
                 </AnchorPane>
             </children>
@@ -115,5 +122,10 @@
                 </ScrollPane>
             </children>
         </AnchorPane>
+      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="213.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../CSSwithPicture/search.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

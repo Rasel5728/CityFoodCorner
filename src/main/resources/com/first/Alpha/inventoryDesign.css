@@ -102,3 +102,38 @@
 .table-view .column-header-background {
     -fx-effect: null;
 }
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-highlight-fill: #F38500;
+    -fx-highlight-text-fill: white;
+    -fx-text-fill: #222;
+    -fx-prompt-text-fill: #888;
+}
+.text {
+    -fx-background-color: white;
+    -fx-border-color: #d4d4d4;
+    -fx-border-width: 1.5px;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+
+    -fx-text-fill: #222;
+    -fx-prompt-text-fill: #9a9a9a;
+
+    -fx-padding: 0 10 0 10;
+
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.text:hover {
+    -fx-border-color: #bdbdbd;
+}
+.text:focused {
+    -fx-border-color: #F38500;
+    -fx-border-width: 1.5px;
+}

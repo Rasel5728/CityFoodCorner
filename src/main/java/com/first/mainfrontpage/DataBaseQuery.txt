@@ -1,23 +1,22 @@
 CREATE DATABASE IF NOT EXISTS inventory_db;
 
-
 USE inventory_db;
-
 
 DROP TABLE IF EXISTS sellHistory;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS users;
 
-
 CREATE TABLE users (
-    id                INT AUTO_INCREMENT PRIMARY KEY,
-    email             VARCHAR(100) NOT NULL UNIQUE,
-    password          VARCHAR(100) NOT NULL,
-    security_question VARCHAR(255) NOT NULL,
-    security_answer   VARCHAR(100) NOT NULL
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    email      VARCHAR(100) NOT NULL UNIQUE,
+    password   VARCHAR(100) NOT NULL,
+    mobile     VARCHAR(20)  NOT NULL,
+    status     VARCHAR(20)  NOT NULL DEFAULT 'pending',
+    -- status values: 'pending', 'approved', 'blocked'
+    joined_on  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_login DATETIME
 );
-
 
 CREATE TABLE products (
     product_id   VARCHAR(50) PRIMARY KEY,
@@ -30,14 +29,13 @@ CREATE TABLE products (
     image        MEDIUMBLOB
 );
 
--- lagtese na taw rekhe dilam -_-
+-- not needed but keeping it just in case -_-
 CREATE TABLE customers (
     customer_id VARCHAR(50) PRIMARY KEY,
     total       DOUBLE NOT NULL,
     date        DATE NOT NULL,
     cashier     VARCHAR(100) NOT NULL
 );
-
 
 CREATE TABLE sellHistory (
     sell_id      INT AUTO_INCREMENT PRIMARY KEY,

@@ -47,8 +47,8 @@
                               <Image url="@../CSSwithPicture/search.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="283.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="58.0" styleClass="cart" stylesheets="@../CSSwithPicture/login.css" text="Search" />
-                        <TextField fx:id="serach" layoutX="26.0" layoutY="3.0" prefHeight="26.0" prefWidth="254.0" promptText="Search by Product ID or Name" styleClass="text-field" stylesheets="@../Alpha/inventoryDesign.css" />
+                        <Button fx:id="Inventory_search_Btn" layoutX="283.0" mnemonicParsing="false" onAction="#inventorySearchBtn" prefHeight="30.0" prefWidth="58.0" styleClass="cart" stylesheets="@../CSSwithPicture/login.css" text="Search" />
+                        <TextField fx:id="inventory_search_bar" layoutX="26.0" layoutY="3.0" prefHeight="26.0" prefWidth="254.0" promptText="Search by Product ID or Name" styleClass="text-field" stylesheets="@../Alpha/inventoryDesign.css" />
                      </children>
                   </AnchorPane>
                </children>

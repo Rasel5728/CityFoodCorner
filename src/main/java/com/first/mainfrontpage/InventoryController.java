@@ -44,6 +44,9 @@ public class InventoryController implements Initializable {
     @FXML private ComboBox<String> inventory_status;
     @FXML private ImageView        inventory_imageView;
 
+    //SEARCH BAR adddd
+    @FXML private TextField inventory_search_bar;
+
     //BUTTOM
     @FXML private Button inventory_addBtn;
     @FXML private Button inventory_updateBtn;
@@ -85,8 +88,20 @@ public class InventoryController implements Initializable {
                     if (selected != null) fillForm(selected);
                 });
 
+        // REAL-TIME SEARCH LISTENER  Adddddd
+        inventory_search_bar.textProperty().addListener((obs, oldVal, newVal) -> {
+            filterTable(newVal.trim().toLowerCase());
+        });
+
+
         //LOAD INITIAL PAGE
         loadAllProducts();
+    }
+
+    //SEARCH BUTTON
+    @FXML
+    void inventorySearchBtn(ActionEvent event) {
+        filterTable(inventory_search_bar.getText().trim().toLowerCase());
     }
 
     //LOAD METHOD, TO GET DATA FROM DB
@@ -138,7 +153,7 @@ public class InventoryController implements Initializable {
         }
     }
 
-    //UPDATE NUTTON
+    //UPDATE BUTTON
     @FXML
     void inventoryUpdateBtn(ActionEvent event) {
         if(inventory_tableView.getSelectionModel().getSelectedItem()==null){
@@ -233,6 +248,22 @@ public class InventoryController implements Initializable {
         inventory_status.setValue(p.getStatus());
     }
 
+    //FILTER TABLE HELPER addddddd
+    private void filterTable(String keyword) {
+        if (keyword.isEmpty()) {
+            inventory_tableView.setItems(productList);
+            return;
+        }
+        ObservableList<Product> filtered = FXCollections.observableArrayList();
+        for (Product p : productList) {
+            if (p.getProductID().toLowerCase().contains(keyword) ||
+                    p.getProductName().toLowerCase().contains(keyword)) {
+                filtered.add(p);
+            }
+        }
+        inventory_tableView.setItems(filtered);
+    }
+
     //CLEAR METHOD
     private void clearForm(){
         inventory_productID.clear();
@@ -243,6 +274,8 @@ public class InventoryController implements Initializable {
         inventory_status.setValue(null);
         inventory_imageView.setImage(null);
         inventory_tableView.getSelectionModel().clearSelection();
+        selectedImageBytes = null;
+        inventory_search_bar.clear();
 
     }
 

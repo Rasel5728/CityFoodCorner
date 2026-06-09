@@ -1,6 +1,8 @@
 package com.first.mainfrontpage;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +21,12 @@ import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
 
+    @FXML
+    private Button searchBtn;
+    @FXML
+    private TextField search;
+    @FXML
+    private AnchorPane searchPane;
     @FXML
     private TextField ammountField;
     @FXML
@@ -40,10 +48,22 @@ public class MenuController implements Initializable {
     private int currentFoodCount=-1;
     private static double currentPrice= 0 ;
 
+    private ListView<String> searchList = new ListView();
+
     private int stock;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        searchList.prefWidth(161);
+        searchList.prefHeight(30);
+        searchList.setVisible(false);
+        searchPane.getChildren().add(searchList);
+
+        search.textProperty().addListener((obs,od,n)->{
+            if(n.isEmpty()) searchList.setVisible(false);
+            else liveSearch(n);
+        });
+
         removeScrollBar(scrollbar);
         loadAllProducts();
     }
@@ -226,5 +246,25 @@ public class MenuController implements Initializable {
     private void receipt(){
         processAndSave();
         tablevVew.getItems().clear();
+    }
+
+    void liveSearch(String alike){
+        ObservableList<String> prodList = FXCollections.observableArrayList();
+        String sql = "SELECT product_name FROM products WHERE product_name LIKE ? ";
+        try (PreparedStatement pstmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            pstmt.setString(1,"%"+alike+"%");
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()){
+                prodList.add(
+                        rs.getString("product_name")
+
+                );
+            }
+            searchList.setItems(prodList);
+            searchList.setVisible(!prodList.isEmpty());
+        } catch (Exception e) {
+            System.out.println("Insert failed: " + e.getMessage());
+        }
     }
 }

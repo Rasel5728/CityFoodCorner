@@ -118,8 +118,8 @@
         </AnchorPane>
       <AnchorPane layoutX="207.0" layoutY="23.0" style="-fx-background-color: #ffff; -fx-background-radius: 4; -fx-border-color: #F7D497; -fx-border-radius: 4;">
          <children>
-            <Button fx:id="searchBtn" layoutX="157.0" layoutY="2.0" mnemonicParsing="false" onAction="#searchIt" prefHeight="26.0" prefWidth="59.0" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Search" />
-            <TextField fx:id="search" layoutX="28.0" prefHeight="30.0" prefWidth="161.0" promptText="Search Menu Item..." styleClass="text-field" stylesheets="@../Alpha/inventoryDesign.css" />
+            <Button fx:id="searchBtn" layoutX="144.0" layoutY="2.0" mnemonicParsing="false" onAction="#searchIt" prefHeight="26.0" prefWidth="72.0" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Search" />
+            <TextField fx:id="search" layoutX="28.0" prefHeight="30.0" prefWidth="161.0" promptText="Search Menu Item" styleClass="text-field" stylesheets="@../Alpha/inventoryDesign.css" />
             <AnchorPane fx:id="searchPane" layoutX="134.0" layoutY="-5.0" />
             <ListView fx:id="searchList" layoutY="26.0" prefHeight="1.0" prefWidth="161.0" style="visibility: false;" />
          </children>

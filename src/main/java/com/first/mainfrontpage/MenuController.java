@@ -2,8 +2,6 @@ package com.first.mainfrontpage;
 
 import com.first.mainfrontpage.FloatPick.Builder;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,47 +20,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 public class MenuController implements Initializable {
 
-    @FXML
-    private Button searchBtn;
-    @FXML
-    private TextField search;
-    @FXML
-    private AnchorPane searchPane;
-    @FXML
-    private TextField ammountField;
-    @FXML
-    private Label changes;
-    @FXML
-    private Label totalField;
-    @FXML
-    private TableView tablevVew;
-    @FXML
-    private TableColumn<String[],String> tableColumn;
-    @FXML
-    private TableColumn<String[],String> quantity;
-    @FXML
-    private TableColumn<String[],String> price;
-    @FXML
-    private ScrollPane scrollbar;
-    @FXML
-    private GridPane menuGrid;
-    private int currentFoodCount=-1;
-    private static double currentPrice= 0 ;
+    @FXML private Button    searchBtn;
+    @FXML private TextField search;
+    @FXML private TextField ammountField;
+    @FXML private Label     changes;
+    @FXML private Label     totalField;
+    @FXML private TableView tablevVew;
+    @FXML private TableColumn<String[], String> tableColumn;
+    @FXML private TableColumn<String[], String> quantity;
+    @FXML private TableColumn<String[], String> price;
+    @FXML private ScrollPane scrollbar;
+    @FXML private GridPane   menuGrid;
 
-    @FXML
-    private ListView<String> searchList = new ListView();
+    @FXML private ListView<String> searchList = new ListView<>();
 
-    private int stock;
+    private int    currentFoodCount = -1;
+    private double currentPrice     = 0;
+    private int    stock;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         searchList.setVisible(false);
         searchList.toFront();
-
 
         new Builder(search, (AnchorPane) search.getParent())
                 .suggestions(this::liveSearch)
@@ -79,21 +61,19 @@ public class MenuController implements Initializable {
         removeScrollBar(scrollbar);
         loadAllProducts();
     }
-    //food count
 
-    public void addFoodToMenu(String name, String price,byte[]image,int count) throws IOException {
-        System.out.println(name+ " "+price);
-        int col = count%2;
-        int row = count/2;
-        menuGrid.add(loadList(name,price,image),col,row);
+    public void addFoodToMenu(String name, String price, byte[] image, int count, int stock) throws IOException {
+        int col = count % 2;
+        int row = count / 2;
+        menuGrid.add(loadList(name, price, image, stock), col, row);
     }
 
-    AnchorPane loadList(String foodName, String foodPrice, byte[]imageBytes) throws IOException {
+    AnchorPane loadList(String foodName, String foodPrice, byte[] imageBytes, int stock) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("foodCard.fxml"));
         AnchorPane card = loader.load();
         FoodCardController controller = loader.getController();
-        controller.setFoodValue(foodName,foodPrice,getImg(imageBytes));
-        controller.setMenuController(this); // passing controller to food card for saving current state -_-
+        controller.setFoodValue(foodName, foodPrice, getImg(imageBytes), stock);
+        controller.setMenuController(this);
         return card;
     }
 
@@ -102,56 +82,64 @@ public class MenuController implements Initializable {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
-    //start
-   void indexMaping(){
-        tableColumn.setCellValueFactory(nameData->
-             new ReadOnlyStringWrapper(nameData.getValue()[0])
-        );
-        quantity.setCellValueFactory((quantity->new ReadOnlyStringWrapper(quantity.getValue()[1])));
-        price.setCellValueFactory(prc -> new ReadOnlyStringWrapper(prc.getValue()[2]));
-   }
+    void indexMaping() {
+        tableColumn.setCellValueFactory(nameData ->
+                new ReadOnlyStringWrapper(nameData.getValue()[0]));
+        quantity.setCellValueFactory(q ->
+                new ReadOnlyStringWrapper(q.getValue()[1]));
+        price.setCellValueFactory(prc ->
+                new ReadOnlyStringWrapper(prc.getValue()[2]));
+    }
 
-   public void setToTable(String name, String quantity, String price){
+    public void setToTable(String name, String quantity, String price) {
         indexMaping();
-        tablevVew.getItems().add(new String[]{name,quantity,price});
-        currentPrice+=Double.parseDouble(price);
-        totalField.setText(Double.toString(currentPrice));
+        tablevVew.getItems().add(new String[]{name, quantity, price});
+        currentPrice += Double.parseDouble(price);
+        totalField.setText(String.format("%.2f", currentPrice));
+    }
 
-   }
-
-   @FXML
-    private void  remove(){
-        tablevVew.getItems().remove(tablevVew.getSelectionModel().getSelectedItem());
-        currentPrice = currentPrice - currentPrice;
-        totalField.setText(Double.toString(currentPrice));
+    @FXML
+    private void remove() {
+        String[] selected = (String[]) tablevVew.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+        currentPrice -= Double.parseDouble(selected[2]);
+        if (currentPrice < 0) currentPrice = 0;
+        tablevVew.getItems().remove(selected);
+        totalField.setText(String.format("%.2f", currentPrice));
         changes.setText("0.0");
         ammountField.clear();
-   }
+    }
 
-   @FXML
-    private void pay(){
+    @FXML
+    private void pay() {
+        if (ammountField.getText().isEmpty()) return;
+        double amount = Double.parseDouble(ammountField.getText());
+        if (amount < currentPrice) {
+            changes.setText("Insufficient");
+            return;
+        }
         updateStock();
-        changes.setText(Double.toString(Double.parseDouble(ammountField.getText()) - Double.parseDouble(totalField.getText())));
-   }
+        changes.setText(String.format("%.2f", amount - currentPrice));
+    }
 
-    private void loadAllProducts(){
+    private void loadAllProducts() {
         currentFoodCount = -1;
-       menuGrid.getChildren().clear();
-        String sql= "SELECT * FROM products";
-        try(Statement stmt=DatabaseConnection.getConnection().createStatement();
-            ResultSet rs=stmt.executeQuery(sql)){
-            while(rs.next()){
+        menuGrid.getChildren().clear();
+        String sql = "SELECT * FROM products";
+        try (Statement stmt = DatabaseConnection.getConnection().createStatement();
+             ResultSet rs   = stmt.executeQuery(sql)) {
+            while (rs.next()) {
                 currentFoodCount++;
-                System.out.println(rs.getString("product_name"));
                 addFoodToMenu(
                         rs.getString("product_name"),
                         String.valueOf(rs.getDouble("price")),
                         rs.getBytes("image"),
-                        currentFoodCount
+                        currentFoodCount,
+                        rs.getInt("stock")
                 );
             }
-        }catch (SQLException e){
-            System.out.println("error");
+        } catch (SQLException e) {
+            System.out.println("error: " + e.getMessage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -160,7 +148,6 @@ public class MenuController implements Initializable {
     private void loadAllProducts(String nm) {
         menuGrid.getChildren().clear();
         currentFoodCount = -1;
-
         String sql = "SELECT * FROM products WHERE product_name LIKE ?";
         try (PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(sql)) {
             ps.setString(1, "%" + nm + "%");
@@ -171,7 +158,8 @@ public class MenuController implements Initializable {
                         rs.getString("product_name"),
                         String.valueOf(rs.getDouble("price")),
                         rs.getBytes("image"),
-                        currentFoodCount
+                        currentFoodCount,
+                        rs.getInt("stock")
                 );
             }
         } catch (SQLException e) {
@@ -181,21 +169,18 @@ public class MenuController implements Initializable {
         }
     }
 
-
     private void getProductStock(String name) {
         String sql = "SELECT stock FROM products WHERE product_name = ?";
         try (PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(sql)) {
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                stock = rs.getInt("stock");
-            }
+            if (rs.next()) stock = rs.getInt("stock");
         } catch (SQLException e) {
             System.out.println("error: " + e.getMessage());
         }
     }
 
-    public void updateStock(String name,int n) {
+    public void updateStock(String name, int n) {
         String sql = "UPDATE products SET stock = ? WHERE product_name = ?";
         try (PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(sql)) {
             ps.setInt(1, n);
@@ -206,84 +191,63 @@ public class MenuController implements Initializable {
         }
     }
 
-
-    public int getStck(String s){
+    public int getStck(String s) {
         getProductStock(s);
         return stock;
     }
 
-    Image getImg(byte[]imageBytes){
-        Image image = null;
+    Image getImg(byte[] imageBytes) {
         if (imageBytes != null) {
-            ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
-            image = new Image(bis);
+            return new Image(new ByteArrayInputStream(imageBytes));
         }
-
-        // Set image to your ImageView
-        ImageView imageView = new ImageView();
-        imageView.setFitWidth(187);
-        imageView.setFitHeight(92);
-        imageView.setPreserveRatio(true);
-        if (image != null) {
-            imageView.setImage(image);
-        }
-        return image;
+        return null;
     }
 
     private void updateStock() {
         for (Object item : tablevVew.getItems()) {
-            String[] row = (String[]) item;
-            String name     = row[0];
-            int quantity    = Integer.parseInt(row[1]);
-
+            String[] row     = (String[]) item;
+            String name      = row[0];
+            int qty          = Integer.parseInt(row[1]);
             int currentStock = getStck(name);
-            int newStock     = currentStock - quantity;
-
-            updateStock(name, Math.max(newStock, 0)); // prevent negative stock
+            updateStock(name, Math.max(currentStock - qty, 0));
         }
     }
 
-    //query
     public void insertSellHistory(String productName, int quantity, double total, String date, String cashier) {
-        // Include the 'quantity' parameter in the SQL
         String sql = "INSERT INTO sellHistory (product_name, quantity, total, date, cashier) VALUES (?, ?, ?, ?, ?)";
-
         try (PreparedStatement pstmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
             pstmt.setString(1, productName);
-            pstmt.setInt(2, quantity); // Set the quantity
+            pstmt.setInt(2, quantity);
             pstmt.setDouble(3, total);
             pstmt.setString(4, date);
-            pstmt.setString(5, cashier); // The index is now 5
-
-            int rowsAffected = pstmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println("Insert successful, rows affected: " + rowsAffected);
-            }
+            pstmt.setString(5, cashier);
+            pstmt.executeUpdate();
         } catch (Exception e) {
             System.out.println("Insert failed: " + e.getMessage());
         }
     }
+
     public void processAndSave() {
-        String date = LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")); // current date and time
-
+        String date = LocalDateTime.now().format(
+                java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         for (Object item : tablevVew.getItems()) {
-            String[] row = (String[]) item;           // cast Object to String[]
+            String[] row       = (String[]) item;
             String productName = row[0];
-            String quantity = row[1];
-            double price       = Double.parseDouble(row[2]);
-
-            insertSellHistory(productName,Integer.parseInt(quantity),price,date,currentUser.userName);
-
-
+            int qty            = Integer.parseInt(row[1]);
+            double p           = Double.parseDouble(row[2]);
+            insertSellHistory(productName, qty, p, date, currentUser.userName);
         }
     }
 
-
     @FXML
-    private void receipt(){
+    private void receipt() {
+        if (tablevVew.getItems().isEmpty()) return;
         processAndSave();
         tablevVew.getItems().clear();
+        currentPrice = 0;
+        totalField.setText("0.00");
+        changes.setText("0.0");
+        ammountField.clear();
     }
 
     List<String> liveSearch(String query) {
@@ -292,9 +256,7 @@ public class MenuController implements Initializable {
         try (PreparedStatement pstmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
             pstmt.setString(1, "%" + query + "%");
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                prodList.add(rs.getString("product_name"));
-            }
+            while (rs.next()) prodList.add(rs.getString("product_name"));
             return prodList;
         } catch (Exception e) {
             System.out.println("Search failed: " + e.getMessage());
@@ -303,13 +265,14 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void searchIt(){
-       if(!Objects.equals(search.getText(), "")) {
-           loadAllProducts(search.getText());
-           search.setText("");
-       } else {
-
-           loadAllProducts();
-       }
+    private void searchIt() {
+        if (!Objects.equals(search.getText(), "")) {
+            loadAllProducts(search.getText());
+            search.setText("");
+            searchBtn.setText("Refresh");
+        } else {
+            searchBtn.setText("Search");
+            loadAllProducts();
+        }
     }
 }

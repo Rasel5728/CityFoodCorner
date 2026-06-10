@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -92,13 +93,6 @@
                                 <Font name="Arial Bold" size="20.0" />
                             </font>
                         </Text>
-                  <AnchorPane layoutX="196.8" layoutY="3.0" prefHeight="30.0" prefWidth="218.0" style="-fx-background-color: #ffff; -fx-background-radius: 4; -fx-border-color: #F7D497; -fx-border-radius: 4;" AnchorPane.bottomAnchor="39.4" AnchorPane.leftAnchor="196.8" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="3.0">
-                     <children>
-                        <Button fx:id="search" layoutX="157.0" layoutY="2.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Search" />
-                        <TextField fx:id="search" layoutX="28.0" prefHeight="30.0" prefWidth="161.0" promptText="Search Menu Item..." styleClass="text-field" stylesheets="@../Alpha/inventoryDesign.css" />
-                        <AnchorPane fx:id="search" layoutX="134.0" layoutY="-5.0" />
-                     </children>
-                  </AnchorPane>
                     </children>
                 </AnchorPane>
             </children>
@@ -122,7 +116,15 @@
                 </ScrollPane>
             </children>
         </AnchorPane>
-      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="213.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+      <AnchorPane layoutX="207.0" layoutY="23.0" style="-fx-background-color: #ffff; -fx-background-radius: 4; -fx-border-color: #F7D497; -fx-border-radius: 4;">
+         <children>
+            <Button fx:id="searchBtn" layoutX="157.0" layoutY="2.0" mnemonicParsing="false" onAction="#searchIt" prefHeight="26.0" prefWidth="59.0" styleClass="cart" stylesheets="@../Alpha/inventoryDesign.css" text="Search" />
+            <TextField fx:id="search" layoutX="28.0" prefHeight="30.0" prefWidth="161.0" promptText="Search Menu Item..." styleClass="text-field" stylesheets="@../Alpha/inventoryDesign.css" />
+            <AnchorPane fx:id="searchPane" layoutX="134.0" layoutY="-5.0" />
+            <ListView fx:id="searchList" layoutY="26.0" prefHeight="1.0" prefWidth="161.0" style="visibility: false;" />
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="212.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../CSSwithPicture/search.png" />
          </image>

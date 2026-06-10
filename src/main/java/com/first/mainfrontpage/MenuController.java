@@ -1,6 +1,9 @@
 package com.first.mainfrontpage;
 
+import com.first.mainfrontpage.FloatPick.Builder;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,10 +18,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 
 public class MenuController implements Initializable {
 
+    @FXML
+    private Button searchBtn;
+    @FXML
+    private TextField search;
+    @FXML
+    private AnchorPane searchPane;
     @FXML
     private TextField ammountField;
     @FXML
@@ -40,10 +53,29 @@ public class MenuController implements Initializable {
     private int currentFoodCount=-1;
     private static double currentPrice= 0 ;
 
+    @FXML
+    private ListView<String> searchList = new ListView();
+
     private int stock;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        searchList.setVisible(false);
+        searchList.toFront();
+
+
+        new Builder(search, (AnchorPane) search.getParent())
+                .suggestions(this::liveSearch)
+                .onSelect((val, f) -> {
+                    f.setText(val);
+                    f.positionCaret(val.length());
+                })
+                .showOnFocus(false)
+                .debounceMs(220)
+                .maxRows(6)
+                .build()
+                .attach();
+
         removeScrollBar(scrollbar);
         loadAllProducts();
     }
@@ -103,6 +135,7 @@ public class MenuController implements Initializable {
    }
 
     private void loadAllProducts(){
+        currentFoodCount = -1;
        menuGrid.getChildren().clear();
         String sql= "SELECT * FROM products";
         try(Statement stmt=DatabaseConnection.getConnection().createStatement();
@@ -123,6 +156,31 @@ public class MenuController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    private void loadAllProducts(String nm) {
+        menuGrid.getChildren().clear();
+        currentFoodCount = -1;
+
+        String sql = "SELECT * FROM products WHERE product_name LIKE ?";
+        try (PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            ps.setString(1, "%" + nm + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                currentFoodCount++;
+                addFoodToMenu(
+                        rs.getString("product_name"),
+                        String.valueOf(rs.getDouble("price")),
+                        rs.getBytes("image"),
+                        currentFoodCount
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("DB error: " + e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private void getProductStock(String name) {
         String sql = "SELECT stock FROM products WHERE product_name = ?";
@@ -226,5 +284,32 @@ public class MenuController implements Initializable {
     private void receipt(){
         processAndSave();
         tablevVew.getItems().clear();
+    }
+
+    List<String> liveSearch(String query) {
+        List<String> prodList = new ArrayList<>();
+        String sql = "SELECT product_name FROM products WHERE product_name LIKE ?";
+        try (PreparedStatement pstmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            pstmt.setString(1, "%" + query + "%");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                prodList.add(rs.getString("product_name"));
+            }
+            return prodList;
+        } catch (Exception e) {
+            System.out.println("Search failed: " + e.getMessage());
+        }
+        return List.of();
+    }
+
+    @FXML
+    private void searchIt(){
+       if(!Objects.equals(search.getText(), "")) {
+           loadAllProducts(search.getText());
+           search.setText("");
+       } else {
+
+           loadAllProducts();
+       }
     }
 }

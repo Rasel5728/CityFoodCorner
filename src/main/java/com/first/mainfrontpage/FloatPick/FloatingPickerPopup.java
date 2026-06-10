@@ -27,24 +27,24 @@ public class FloatingPickerPopup {
     private static final double GAP = 5.0;
 
     private static final String POPUP_STYLE =
-            "-fx-background-color:#13111F;" +
+            "-fx-background-color:#F5EFDA;" +
                     "-fx-background-radius:14;" +
-                    "-fx-border-color:#2A2740;" +
+                    "-fx-border-color:#D4C9A8;" +
                     "-fx-border-radius:14;" +
                     "-fx-border-width:1;" +
-                    "-fx-effect:dropshadow(gaussian,#000000CC,20,0,0,6);";
+                    "-fx-effect:dropshadow(gaussian,#00000066,20,0,0,6);";
 
     private static final String ROW_IDLE =
             "-fx-background-color:transparent;" +
                     "-fx-background-radius:9;" +
-                    "-fx-text-fill:#C4B5F5;" +
+                    "-fx-text-fill:#5C4A2A;" +
                     "-fx-font-size:12.5px;" +
                     "-fx-cursor:hand;";
 
     private static final String ROW_HOVER =
-            "-fx-background-color:#201D34;" +
+            "-fx-background-color:#EBE0C4;" +
                     "-fx-background-radius:9;" +
-                    "-fx-text-fill:#EDE9F6;" +
+                    "-fx-text-fill:#3B2E14;" +
                     "-fx-font-size:12.5px;" +
                     "-fx-cursor:hand;";
 

@@ -26,12 +26,12 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Button layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#decrementCount" prefHeight="25.0" prefWidth="38.0" styleClass="update-btn" stylesheets="@../CSSwithPicture/login.css" text="-">
+                <Button fx:id="decrementBtn" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#decrementCount" prefHeight="25.0" prefWidth="38.0" styleClass="update-btn" stylesheets="@../CSSwithPicture/login.css" text="-">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <Button layoutX="83.0" layoutY="3.0" mnemonicParsing="false" onAction="#increamentFoodCount" prefHeight="25.0" prefWidth="38.0" styleClass="update-btn" stylesheets="@../CSSwithPicture/login.css" text="+">
+                <Button fx:id="incrementBtn" layoutX="83.0" layoutY="3.0" mnemonicParsing="false" onAction="#increamentFoodCount" prefHeight="25.0" prefWidth="38.0" styleClass="update-btn" stylesheets="@../CSSwithPicture/login.css" text="+">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -43,6 +43,6 @@
                 <Font name="Arial Bold" size="14.0" />
             </font>
         </Label>
-      <Button layoutX="148.0" layoutY="133.0" mnemonicParsing="false" onAction="#addFood" prefHeight="27.0" prefWidth="52.0" styleClass="cart" stylesheets="@../CSSwithPicture/login.css" text="Add" />
+        <Button fx:id="addBtn" layoutX="148.0" layoutY="133.0" mnemonicParsing="false" onAction="#addFood" prefHeight="27.0" prefWidth="52.0" styleClass="cart" stylesheets="@../CSSwithPicture/login.css" text="Add" />
     </children>
 </AnchorPane>

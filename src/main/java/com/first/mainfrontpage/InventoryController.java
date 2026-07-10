@@ -248,7 +248,7 @@ public class InventoryController implements Initializable {
         inventory_status.setValue(p.getStatus());
     }
 
-    //FILTER TABLE HELPER addddddd
+    //FILTER TABLE METHOD addddddd
     private void filterTable(String keyword) {
         if (keyword.isEmpty()) {
             inventory_tableView.setItems(productList);

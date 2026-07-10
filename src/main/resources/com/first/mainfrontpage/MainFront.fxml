@@ -32,7 +32,7 @@
                               <Button layoutX="20.0" layoutY="225.0" mnemonicParsing="false" onAction="#dashBoard" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="DASHBOARD" />
                               <Button layoutX="20.0" layoutY="284.0" mnemonicParsing="false" onAction="#inventory" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="INVENTORY" />
                               <Button layoutX="19.0" layoutY="341.0" mnemonicParsing="false" onAction="#menu" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="MENU" />
-                              <Button layoutX="19.0" layoutY="398.0" mnemonicParsing="false" onAction="#customers" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="CUSTOMERS" />
+                              <Button layoutX="19.0" layoutY="398.0" mnemonicParsing="false" onAction="#customers" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 10;" styleClass="menu-btn" stylesheets="@MainFront.css" text="SALES HISTORY" />
                               <Button fx:id="logoutButton" layoutX="19.0" layoutY="484.0" mnemonicParsing="false" onAction="#signout" prefHeight="45.0" prefWidth="50.0" styleClass="signout-btn" stylesheets="@MainFront.css">
                                  <font>
                                     <Font size="18.0" />
